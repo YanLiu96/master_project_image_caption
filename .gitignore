@@ -1,4 +1,5 @@
-coco_dataset/raw_data/train2014
+coco_dataset/caption_datasets
+coco_dataset/train2014
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
