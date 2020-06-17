@@ -6,6 +6,7 @@
 import os
 import json
 from collections import Counter
+from random import seed, choice, sample
 
 train_images_names=[]
 train_images_captions=[]
@@ -16,6 +17,7 @@ test_images_captions=[]
 word_frequency = Counter()
 vocabulary=[]
 word2idx={}
+
 
 def split_dataset(caption_file, max_caption_len):
     with open(caption_file, 'r') as j:
@@ -31,6 +33,8 @@ def split_dataset(caption_file, max_caption_len):
 
         if len(caps_for_image) == 0:
             continue
+        # because the number of captions of  some images is not 5. So make up the difference
+        caps_for_image = make_up_diff(caps_for_image)
 
         path = os.path.join("coco_dataset", image['filepath'], image['filename']) 
         if image['split'] in {'train', 'restval'}:
@@ -42,6 +46,7 @@ def split_dataset(caption_file, max_caption_len):
         elif image['split'] in {'test'}:
             test_images_names.append(path)
             test_images_captions.append(caps_for_image)
+      
     try:
         len(train_images_names) == len(train_images_captions) # 113287
         len(val_images_names) == len(val_images_captions) # 5000
@@ -51,6 +56,19 @@ def split_dataset(caption_file, max_caption_len):
 
     print('--Coco dataset has already been splited into train, val, test subsets--')
     print('--The length of training set is %s --' %len(train_images_names))
+
+
+def make_up_diff(caps_for_image):
+    if len(caps_for_image)<5:
+        miss_quantity = 5-len(caps_for_image)
+        seed(123)
+        for i in range(miss_quantity):
+            caps_for_image = caps_for_image + [choice(caps_for_image)]
+    else:
+        caps_for_image = sample(caps_for_image, k=5)
+    assert len(caps_for_image) == 5
+    return caps_for_image
+
 
 def build_vocabulary_word2idx(min_word_freq):
     # Create word map
