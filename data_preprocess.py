@@ -6,11 +6,7 @@
 import os
 import json
 from collections import Counter
-# def create_input_files(dataset, caption_file, image_folder, num_of_caption_per_image, min_word_freq, output_folder, max_len=100):
-#     assert dataset in {'coco', 'flickr8k', 'flickr30k'}
-#     # 
-#     with open(karpathy_json_path, 'r') as j:
-#         data = json.load(j)
+
 train_images_names=[]
 train_images_captions=[]
 val_images_names=[]
@@ -51,8 +47,6 @@ def split_dataset(caption_file, max_caption_len):
     assert len(test_images_names) == len(test_images_captions) # 5000
     print('--coco dataset has already been splited into train, val, test subsets--')
 
-split_dataset('coco_dataset/caption_datasets/dataset_coco.json', 50)
-
 def build_vocabulary_word2idx(min_word_freq):
     # Create word map
     for word in word_frequency.keys():
@@ -66,11 +60,7 @@ def build_vocabulary_word2idx(min_word_freq):
     word2idx['<pad>'] = 0
     print('The size of vocabulary is %s' %len(vocabulary))
     print('The size of word2idx is %s' %len(word2idx))
-build_vocabulary_word2idx(5)
 
 def save_word2idx(word2idx_save_path):
     with open(os.path.join(word2idx_save_path,'word2idx.json'), 'w') as j:
         json.dump(word2idx, j)
-save_word2idx('saved_data/')
-
-

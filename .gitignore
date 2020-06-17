@@ -1,6 +1,6 @@
 coco_dataset/caption_datasets
 coco_dataset/train2014
-
+coco_dataset/val2014
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
