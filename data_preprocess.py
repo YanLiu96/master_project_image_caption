@@ -42,10 +42,15 @@ def split_dataset(caption_file, max_caption_len):
         elif image['split'] in {'test'}:
             test_images_names.append(path)
             test_images_captions.append(caps_for_image)
-    assert len(train_images_names) == len(train_images_captions) # 113287
-    assert len(val_images_names) == len(val_images_captions) # 5000
-    assert len(test_images_names) == len(test_images_captions) # 5000
-    print('--coco dataset has already been splited into train, val, test subsets--')
+    try:
+        len(train_images_names) == len(train_images_captions) # 113287
+        len(val_images_names) == len(val_images_captions) # 5000
+        len(test_images_names) == len(test_images_captions) # 5000
+    except Exception as e:
+        print(e)
+
+    print('--Coco dataset has already been splited into train, val, test subsets--')
+    print('--The length of training set is %s --' %len(train_images_names))
 
 def build_vocabulary_word2idx(min_word_freq):
     # Create word map
