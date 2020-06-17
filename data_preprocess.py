@@ -29,6 +29,10 @@ def split_dataset(caption_file, max_caption_len):
             word_frequency.update(caption['tokens'])
             if len(caption['tokens']) <= max_caption_len:
                 caps_for_image.append(caption['tokens'])
+
+        if len(caps_for_image) == 0:
+            continue
+
         path = os.path.join("coco_dataset", image['filepath'], image['filename']) 
         if image['split'] in {'train', 'restval'}:
             train_images_names.append(path)
@@ -45,3 +49,20 @@ def split_dataset(caption_file, max_caption_len):
     print('--coco dataset has already been splited into train, val, test subsets--')
 
 split_dataset('coco_dataset/caption_datasets/dataset_coco.json', 50)
+
+def build_vocabulary_word2idx(min_word_freq):
+    # Create word map
+    vocabulary=[]
+    word2idx={}
+    for word in word_frequency.keys():
+        if word_frequency[word] > min_word_freq:
+            vocabulary.append(word)
+    for v,k in enumerate(vocabulary):
+        word2idx.update({k:v+1})
+    word2idx['<unk>'] = len(word2idx) + 1
+    word2idx['<start>'] = len(word2idx) + 1
+    word2idx['<end>'] = len(word2idx) + 1
+    word2idx['<pad>'] = 0
+    print('The size of vocabulary is %s' %len(vocabulary))
+    print('The size of word2idx is %s' %len(word2idx))
+build_vocabulary_word2idx(5)
