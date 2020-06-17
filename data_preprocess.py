@@ -18,6 +18,9 @@ val_images_captions=[]
 test_images_names=[]
 test_images_captions=[]
 word_frequency = Counter()
+vocabulary=[]
+word2idx={}
+
 def split_dataset(caption_file, max_caption_len):
     with open(caption_file, 'r') as j:
         annotation = json.load(j)
@@ -52,8 +55,6 @@ split_dataset('coco_dataset/caption_datasets/dataset_coco.json', 50)
 
 def build_vocabulary_word2idx(min_word_freq):
     # Create word map
-    vocabulary=[]
-    word2idx={}
     for word in word_frequency.keys():
         if word_frequency[word] > min_word_freq:
             vocabulary.append(word)
@@ -66,3 +67,10 @@ def build_vocabulary_word2idx(min_word_freq):
     print('The size of vocabulary is %s' %len(vocabulary))
     print('The size of word2idx is %s' %len(word2idx))
 build_vocabulary_word2idx(5)
+
+def save_word2idx(word2idx_save_path):
+    with open(os.path.join(word2idx_save_path,'word2idx.json'), 'w') as j:
+        json.dump(word2idx, j)
+save_word2idx('saved_data/')
+
+
