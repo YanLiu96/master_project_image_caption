@@ -37,7 +37,7 @@ def split_dataset(caption_file, max_caption_len):
         caps_for_image = make_up_diff(caps_for_image)
 
         path = os.path.join("coco_dataset", image['filepath'], image['filename']) 
-        if image['split'] in {'train', 'restval'}:
+        if image['split'] in {'train', 'restval'}: # use some images in val to extend the train set
             train_images_names.append(path)
             train_images_captions.append(caps_for_image)
         elif image['split'] in {'val'}:
@@ -62,7 +62,7 @@ def make_up_diff(caps_for_image):
     if len(caps_for_image)<5:
         miss_quantity = 5-len(caps_for_image)
         seed(123)
-        for i in range(miss_quantity):
+        for _ in range(miss_quantity):
             caps_for_image = caps_for_image + [choice(caps_for_image)]
     else:
         caps_for_image = sample(caps_for_image, k=5)

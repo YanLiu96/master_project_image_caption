@@ -11,6 +11,8 @@ wget = "*"
 flask = "*"
 numpy = "*"
 h5py = "*"
+progress = "*"
+imageio = "*"
 
 [requires]
 python_version = "3.6"
