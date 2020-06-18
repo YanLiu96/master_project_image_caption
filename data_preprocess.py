@@ -49,7 +49,7 @@ def split_dataset(caption_file, max_caption_len):
             test_images_captions.append(caps_for_image)
       
     try:
-        len(train_images_names) == len(train_images_captions) # 113287
+        len(train_images_names) == len(train_images_captions) # 113287 [ [[c1],[c2],[c3]],[[b1],[b2],[b3]] ]
         len(val_images_names) == len(val_images_captions) # 5000
         len(test_images_names) == len(test_images_captions) # 5000
     except Exception as e:
