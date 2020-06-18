@@ -2,7 +2,8 @@
 
 # This file is used for preprocess downloaded data
 # 1. splite dataset into train, valuate, test subset.
-# 2. 
+# 2. make up the number of captions
+# 3. build and save vocabulary
 import os
 import json
 from collections import Counter
