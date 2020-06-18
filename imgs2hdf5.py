@@ -1,3 +1,6 @@
+# Step3: data_preprocess.py created in 2020.6.17 13:19
+# This file resize the images and store them in hdf5 file.
+
 import os
 import time
 import h5py
@@ -49,4 +52,4 @@ def create_hdf5_file(type, imgaes_names, image_captions):
             images[i] = img
             bar.next() 
         bar.finish()
-        print ('Time taken for loading {} images in hdf5 file: {} sec\n'.format(type, time.time() - start))
+    print ('Time taken for saving {} images in hdf5 file: {} sec\n'.format(type, time.time() - start))
