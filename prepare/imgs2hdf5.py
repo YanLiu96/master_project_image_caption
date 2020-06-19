@@ -9,12 +9,12 @@ import numpy as np
 import imageio
 
 from PIL import Image
-from progress.bar import Bar
+from progress.bar import ChargingBar
 # from scipy.misc import imread, imresize
 
-from data_preprocess import train_images_names, train_images_captions
-from data_preprocess import val_images_names, val_images_captions
-from data_preprocess import test_images_names, test_images_captions
+from prepare.data_preprocess import train_images_names, train_images_captions
+from prepare.data_preprocess import val_images_names, val_images_captions
+from prepare.data_preprocess import test_images_names, test_images_captions
 
 #from data_preprocess import test_images_captions
 def images_save_in_hdf5():
@@ -35,7 +35,7 @@ def create_hdf5_file(type, imgaes_names, image_captions):
         f.attrs['captions_per_image'] = 5
         images = f.create_dataset('images', (len(imgaes_names), 3, 256, 256), dtype='uint8')
         print("%s images storage in progress\n" % type)
-        bar = Bar('Processing', max=len(imgaes_names))
+        bar = ChargingBar('Processing '+type+' images in hdf5 file', max=len(imgaes_names))
         for i, path in enumerate(imgaes_names):
             img = imageio.imread(path)
             #img = imread(path)

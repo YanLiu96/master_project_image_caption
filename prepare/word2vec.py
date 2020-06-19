@@ -3,11 +3,12 @@
 import os
 import time
 import json
-from progress.bar import Bar
-from data_preprocess import train_images_names, train_images_captions
-from data_preprocess import val_images_names, val_images_captions
-from data_preprocess import test_images_names, test_images_captions
-from data_preprocess import word2idx
+from progress.bar import IncrementalBar
+
+from prepare.data_preprocess import train_images_names, train_images_captions
+from prepare.data_preprocess import val_images_names, val_images_captions
+from prepare.data_preprocess import test_images_names, test_images_captions
+from prepare.data_preprocess import word2idx
 
 # save caption vectors
 def save_cap_vec(max_cap_len):
@@ -21,7 +22,7 @@ def cap2vec(type, dataset, max_cap_len):
     cap_vec=[]
     cap_len=[]
     print('\n')
-    bar = Bar('Processing caption vector', max=len(dataset)*5)
+    bar = IncrementalBar('Processing '+type+' caption vector', max=len(dataset)*5)
     start = time.time()
     for captions in dataset:
         for caption in captions: #[ [[c1],[c2],[c3]],[[b1],[b2],[b3]] ] caption: ['a','b','c']
@@ -35,7 +36,7 @@ def cap2vec(type, dataset, max_cap_len):
             cap_vec.append(temp) #[[0,1,2,3,4....],[0,1,2,3,4....],[0,1,2,3,4....]....]
             cap_len.append(len(caption)+2)
             bar.next()
-
+    bar.finish()
     with open(os.path.join('saved_data/cap2vec',type+'_cap_vec.json'),'w') as f1:
             json.dump(cap_vec, f1)
 

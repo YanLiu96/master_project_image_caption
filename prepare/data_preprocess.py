@@ -19,7 +19,6 @@ word_frequency = Counter()
 vocabulary=[]
 word2idx={}
 
-
 def split_dataset(caption_file, max_caption_len):
     with open(caption_file, 'r') as j:
         annotation = json.load(j)
