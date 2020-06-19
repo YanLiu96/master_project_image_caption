@@ -1,19 +1,17 @@
-import torch
-from torch.utils.data import Dataset
+# 6.19 20:37
+import os
 import h5py
 import json
-import os
+import torch
+from torch.utils.data import Dataset
 
 
 class CaptionDataset(Dataset):
-    """
-    A PyTorch Dataset class to be used in a PyTorch DataLoader to create batches.
-    """
 
     def __init__(self, data_folder, data_name, split, transform=None):
         """
-        :param data_folder: folder where data files are stored
-        :param data_name: base name of processed datasets
+        :param data_folder: saved_data/_cap_vec.json
+        :param data_name:
         :param split: split, one of 'TRAIN', 'VAL', or 'TEST'
         :param transform: image transform pipeline
         """
@@ -21,18 +19,18 @@ class CaptionDataset(Dataset):
         assert self.split in {'TRAIN', 'VAL', 'TEST'}
 
         # Open hdf5 file where images are stored
-        self.h = h5py.File(os.path.join(data_folder, self.split + '_IMAGES_' + data_name + '.hdf5'), 'r')
+        self.h = h5py.File('saved_data/hdf5_images/'+self.split+'_images.hdf5', 'r')
         self.imgs = self.h['images']
 
         # Captions per image
         self.cpi = self.h.attrs['captions_per_image']
 
         # Load encoded captions (completely into memory)
-        with open(os.path.join(data_folder, self.split + '_CAPTIONS_' + data_name + '.json'), 'r') as j:
+        with open('saved_data/cap2vec/'+self.split+'_cap_vec', 'r') as j:
             self.captions = json.load(j)
 
         # Load caption lengths (completely into memory)
-        with open(os.path.join(data_folder, self.split + '_CAPLENS_' + data_name + '.json'), 'r') as j:
+        with open('saved_data/cap2vec/'+self.split+'_cap_len', 'r') as j:
             self.caplens = json.load(j)
 
         # PyTorch transformation pipeline for the image (normalizing, etc.)
