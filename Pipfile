@@ -13,6 +13,7 @@ numpy = "*"
 h5py = "*"
 progress = "*"
 imageio = "*"
+torch = "*"
 
 [requires]
 python_version = "3.6"
