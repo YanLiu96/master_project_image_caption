@@ -13,8 +13,9 @@ image_format=set(['png', 'jpg', 'JPG', 'PNG'])
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in image_format
 
-def init_models(img_pth):
-    caption_img(img_pth)
+def get_description(img_pth):
+    result = caption_img(img_pth)
+    return result
 
 app = Flask(__name__)
 CORS(app)
@@ -30,14 +31,12 @@ def upload():
     message=''
     try:
         if request.method=='POST':
-            print('1')
-            print(request.files)
             if 'images' not in request.files:
                 message='Please uploading your image'
                 print(message)
                 return render_template('index.html', messge=message)
             img_files=request.files.getlist('images')
-            # # check the format of image
+            # check the format of image
             for file in img_files:
                 if not (file and allowed_file(file.filename)):
                     message='The image format is wrong, please upload png or jpg format'
@@ -50,14 +49,14 @@ def upload():
                         uploaded_img_name='test.jpg'
                     uploaded_img_path= os.path.join(base_path, 'static/images',uploaded_img_name)
                     file.save(uploaded_img_path)
-                    print('end')
+                    print('You have uploaded the images')
+                    get_description(uploaded_img_path)
     except:
         #上传的文件是其他文件改成jpg格式会报错
         message = 'something error,please make sure the uploaded file is in JPG format!'
         return render_template('index.html', message=message)
     print('5')
     return render_template('index.html', message=message)
-
 
 
 if __name__ == '__main__':

@@ -4,7 +4,6 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "*"
 
 [packages]
 wget = "*"
@@ -14,6 +13,11 @@ h5py = "*"
 progress = "*"
 imageio = "*"
 torch = "*"
+matplotlib = "*"
+scikit-image = "*"
+pylint = "*"
+werkzeug = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.6"
