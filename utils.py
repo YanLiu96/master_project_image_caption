@@ -3,6 +3,8 @@ import torch.nn.functional as F
 import numpy as np
 import json
 import torchvision.transforms as transforms
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import skimage.transform
@@ -105,7 +107,7 @@ def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=
             top_k_scores, top_k_words = scores.view(-1).topk(k, 0, True, True)  # (s)
 
         # Convert unrolled indices to actual indices of scores
-        prev_word_inds = top_k_words / vocab_size  # (s)
+        prev_word_inds = top_k_words // vocab_size  # (s)
         next_word_inds = top_k_words % vocab_size  # (s)
 
         # Add new words to sequences, alphas
@@ -148,7 +150,7 @@ def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=
     return seq, alphas
 
 
-def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True):
+def visualize_att(result_name, image_path, seq, alphas, rev_word_map, smooth=True):
     """
     Visualizes caption with weights at every word.
     Adapted from paper authors' repo: https://github.com/kelvinxu/arctic-captions/blob/master/alpha_visualization.ipynb
@@ -181,7 +183,9 @@ def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True):
             plt.imshow(alpha, alpha=0.8)
         plt.set_cmap(cm.Greys_r)
         plt.axis('off')
-    plt.show()
+    #plt.show()
+    result_name='static/images/'+result_name
+    plt.savefig(result_name)
 
 
 def caption_img(test_img_path):

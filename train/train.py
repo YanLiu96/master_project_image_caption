@@ -6,10 +6,11 @@ import torch.utils.data
 import torchvision.transforms as transforms
 from torch import nn
 from torch.nn.utils.rnn import pack_padded_sequence
+
 from models.encoder import Encoder
 from models.decoder_Attention import DecoderWithAttention
 from train.dataset import MyDataset
-
+#from prepare.data_preprocess import *
 from nltk.translate.bleu_score import corpus_bleu
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # sets device for model and PyTorch tensors
@@ -28,7 +29,7 @@ cudnn.benchmark = True  # set to true only if inputs to model are fixed size; ot
 
 # Training parameters
 start_epoch = 0
-epochs = 1  # number of epochs to train for (if early stopping is not triggered)
+epochs = 5  # number of epochs to train for (if early stopping is not triggered)
 epochs_since_improvement = 0  # keeps track of number of epochs since there's been an improvement in validation BLEU
 batch_size = 32
 workers = 1  # for data-loading; right now, only 1 works with h5py
@@ -82,7 +83,8 @@ def save_checkpoint(data_name, epoch, epochs_since_improvement, encoder, decoder
     torch.save(state, filename)
     # If this checkpoint is the best so far, store a copy so it doesn't get overwritten by a worse checkpoint
     if is_best:
-        torch.save(state, 'BEST_' + filename)
+        filepath='saved_data/trained_models/best_checkpoint_' + data_name + '.pth.tar'
+        torch.save(state, filepath)
 
 
 class AverageMeter(object):
@@ -277,8 +279,8 @@ def train(train_loader, encoder, decoder, criterion, encoder_optimizer, decoder_
 
         # Remove timesteps that we didn't decode at, or are pads
         # pack_padded_sequence is an easy trick to do this
-        scores = pack_padded_sequence(scores, decode_lengths, batch_first=True)[0]
-        targets = pack_padded_sequence(targets, decode_lengths, batch_first=True)[0]
+        scores= pack_padded_sequence(scores, decode_lengths, batch_first=True).data
+        targets= pack_padded_sequence(targets, decode_lengths, batch_first=True).data
 
         # Calculate loss
         loss = criterion(scores, targets)
@@ -368,8 +370,8 @@ def validate(val_loader, encoder, decoder, criterion):
             # Remove timesteps that we didn't decode at, or are pads
             # pack_padded_sequence is an easy trick to do this
             scores_copy = scores.clone()
-            scores, _ = pack_padded_sequence(scores, decode_lengths, batch_first=True)
-            targets, _ = pack_padded_sequence(targets, decode_lengths, batch_first=True)
+            scores = pack_padded_sequence(scores, decode_lengths, batch_first=True).data
+            targets = pack_padded_sequence(targets, decode_lengths, batch_first=True).data
 
             # Calculate loss
             loss = criterion(scores, targets)
@@ -426,3 +428,7 @@ def validate(val_loader, encoder, decoder, criterion):
                 bleu=bleu4))
 
     return bleu4
+
+
+# if __name__ == '__main__':
+#     main()
