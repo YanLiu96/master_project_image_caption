@@ -196,7 +196,7 @@ def caption_img(test_img_path):
     # args = parser.parse_args()
 
     # Load model
-    checkpoint = torch.load('../saved_data/trained_models/BEST_checkpoint_trained_models.pth.tar', map_location=str(device))
+    checkpoint = torch.load('saved_data/trained_models/best_checkpoint_trained_models.pth.tar', map_location=str(device))
     decoder = checkpoint['decoder']
     decoder = decoder.to(device)
     decoder.eval()
@@ -205,7 +205,7 @@ def caption_img(test_img_path):
     encoder.eval()
 
     # Load word map (word2ix)
-    with open('../master_project_image_caption/saved_data/word2index/word2idx.json', 'r') as j:
+    with open('saved_data/word2index/word2idx.json', 'r') as j:
         word_map = json.load(j)
     rev_word_map = {v: k for k, v in word_map.items()}  # ix2word
 
