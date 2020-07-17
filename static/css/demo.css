@@ -1,0 +1,29 @@
+#app {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  max-width: 1200px;
+  margin: auto;
+}
+#app .images {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+}
+#app .images .image img {
+  width: 15rem;
+  height: 15rem;
+  object-fit: cover;
+  margin: 1rem;
+  border: 4px solid white;
+  box-shadow: 3px 3px 13px grey;
+}
+#app .images .active img {
+  border-color: pink;
+}
+#app .bigImage {
+  height: 22rem;
+  margin: 1rem;
+  border: 4px solid white;
+  box-shadow: 3px 3px 13px grey;
+}

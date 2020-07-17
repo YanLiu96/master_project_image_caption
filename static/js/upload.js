@@ -166,7 +166,7 @@
       console.log('begin upload')
       $.ajax({
         type: 'POST',
-        url: '/upload',
+        url: '/test',
         dataType: 'json',
         data: form_data,
         contentType: false,
