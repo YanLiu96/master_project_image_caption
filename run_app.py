@@ -1,6 +1,8 @@
 import os,shutil
 import torch
 import json
+import warnings
+warnings.filterwarnings("ignore")
 import matplotlib
 from flask import Flask
 from flask import render_template, request, jsonify
@@ -29,7 +31,6 @@ def models_init():
     encoder = checkpoint['encoder']
     encoder = encoder.to(device)
     encoder.eval()
-    print('hah')
     # Load word map (word2ix)
     with open('saved_data/word2index/word2idx.json', 'r') as j:
         word_map = json.load(j)
@@ -39,20 +40,24 @@ def models_init():
 
 app = Flask(__name__)
 CORS(app)
-# 设置静态文件缓存过期时间
-#app.send_file_max_age_default = timedelta(seconds=1)
+
+# # 设置静态文件缓存过期时间
+# #app.send_file_max_age_default = timedelta(seconds=1)
 decoder,encoder, word_map, rev_word_map = models_init()
 
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
-@app.route('/upload', methods=['POST','GET'])
+@app.route('/demo', methods=['GET'])
+def demo():
+    return render_template('demo.html')
+
+@app.route('/test', methods=['POST','GET'])
 def upload():
     message=''
     try:
         if request.method=='POST':
-
             # delete all the privous uploaded files
             folder= os.path.join(os.path.dirname(__file__),'static/images')
             for filename in os.listdir(folder):
@@ -88,7 +93,7 @@ def upload():
             for file in img_files:
                 if not (file and allowed_file(file.filename)):
                     message='The image format is wrong, please upload png or jpg format'
-                    return render_template('index.html', message=message)
+                    return render_template('upload.html', message=message)
                 else:
                     base_path= os.path.dirname(__file__)
                     #if IS_CACHE_IMG:
@@ -107,8 +112,8 @@ def upload():
     except:
         #上传的文件是其他文件改成jpg格式会报错
         message = 'something error,please make sure the uploaded file is in JPG format!'
-        return render_template('index.html', message=message)
-    return render_template('index.html', message=message)
+        return render_template('upload.html', message=message)
+    return render_template('upload.html', message=message)
 
 if __name__ == '__main__':
     app.debug=True
