@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Test the given images</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="../static/css/upload.css">
+
+</head>
+
+<body>
+  <nav id="main-nav">
+    <div class="full-wrapper relative">
+      <div id="nav-menu-wrap">
+        <div id="nav-page-section">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li>
+          </ul>
+        </div>
+        <div class="separator-menu"></div>
+
+        <!-- [end #nav-section] -->
+        <div id="nav-tools-section">
+          <ul>
+            <li><a href="#" class="signin-btn-nav">Train a model</a></li>
+            <li><a href="/upload" class="signin-btn-nav">Test the model</a></li>
+            <li><a href="#" class="signin-btn-nav">Some Demos</a></li>
+          </ul>
+        </div>
+
+        <!-- [end #nav-tools-section] -->
+      </div>
+
+      <!-- humber menu & overlay menu-->
+      <div class="button_container" id="toggle">
+        <span class="top"></span>
+        <span class="middle"></span>
+        <span class="bottom"></span>
+      </div>
+
+      <div class="overlay" id="overlay">
+        <nav class="overlay-menu">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="#">Train a model</a></li>
+            <li><a href="/test">Test the model</a></li>
+            <li><a href="#">Some Demos</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </nav>
+  <div class="container" id="imageWgt">
+    <div>
+      <p align="center" style="color:aliceblue";>Select images, upload images, then get the test result.
+      </p>
+    </div>
+    <div class="row image-row">
+      <div class="col-8">
+        <div class="image-upload">
+          <span class="image-icon">
+          </span>
+          <span class="image-instr">Click here to select file(s)</span>
+        </div>
+      </div>
+      <div class="col-4">
+        <ul class="list-group  image-status">
+          <li style="background-color: #ccc"; class="list-group-item"># of file(s) <span class="badge badge-info image-count">0</span></li>
+          <li style="background-color: #ccc"; class="list-group-item">Total Size <span class="badge badge-info image-tot-size">0 Mb</span>
+            <div class="progress">
+              <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+                aria-valuemax="100"></div>
+            </div>
+            <div class="max-size-limit"></div>
+          </li>
+        </ul>
+        <div class="alert alert-info" role="alert">
+          <span class="fa fa-exclamation-circle"></span> Click on <b>Upload and Test Image</b> to get the results
+        </div>
+        <div class="image-action">
+          <button type="button" disabled class="upload-start btn btn-outline-success btn-block"> Upload and Test Image(s)</button>
+          <button type="button" disabled class="upload-clean btn btn-outline-danger btn-block">Clear</button>
+        </div>
+      </div>
+    </div>
+    <div class="images-to-upload">
+      <ul>
+      </ul>
+    </div>
+  </div>
+      <!-- [Script stiky menu ] -->
+      <script type="text/javascript">
+        window.addEventListener("scroll", function () {
+          if (window.pageYOffset > 50) {
+            document.getElementById("main-nav").className = "scrolling";
+          } else {
+            document.getElementById("main-nav").className = "";
+          }
+        })
+      </script>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
+  <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js'></script>
+  <script src="../static/js/upload.js"></script>
+  <script src="../static/js/nav.js"></script>
+</body>
+
+</html>
