@@ -1,60 +1,206 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - SIMPLE IMAGE UPLOAD WIDGET using jQuery, jQuery-ui, lodash, handlebars</title>
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css'>
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><link rel="stylesheet" href="../static/css/style.css">
+  <title>Let computer tell what the image is about - Yan Liu Project</title>
+  <script src="https://use.typekit.net/zbv4fek.js"></script>
+  <script>
+    try {
+      Typekit.load({
+        async: true
+      });
+    } catch (e) {}
+  </script>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="../static/css/index.css">
 
 </head>
-<body>
-<!-- partial:index.partial.html -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <!-- 点击跳转界面 -->
-  <a class="navbar-brand" href="#"><i class="fa fa-image"></i> Image Upload</a>
-</nav>
 
-<div class="container" id="imageWgt">
-  <div class="row image-row">
-    <div class="col-8">
-      <div class="image-upload">
-        <span class="image-icon">
-        </span>
-        <span class="image-instr">Click here to select file(s)</span>
+<body>
+  <!-- partial:index.partial.html -->
+  <html>
+
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/daneden/animate.css/master/animate.min.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+
+
+    <div class="page" id="top">
+
+      <nav id="main-nav">
+
+        <div class="full-wrapper relative">
+
+          <!-- 
+        <div id="nav-logo-wrap">
+          <a href="/"><img src="https://assets.manchester.ac.uk/corporate/images/design/logo-university-of-manchester.png" alt="Veruscript"></a>
+        </div>
+        -->
+          <div id="nav-menu-wrap">
+            <div id="nav-page-section">
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+              </ul>
+            </div>
+            <div class="separator-menu"></div>
+
+            <!-- [end #nav-section] -->
+            <div id="nav-tools-section">
+              <ul>
+                <li><a href="#" class="signin-btn-nav">Train a model</a></li>
+                <li><a href="/test" class="signin-btn-nav">Test the model</a></li>
+                <li><a href="#" class="signin-btn-nav">Some Demos</a></li>
+              </ul>
+            </div>
+
+            <!-- [end #nav-tools-section] -->
+          </div>
+
+          <!-- humber menu & overlay menu-->
+          <div class="button_container" id="toggle">
+            <span class="top"></span>
+            <span class="middle"></span>
+            <span class="bottom"></span>
+          </div>
+
+          <div class="overlay" id="overlay">
+            <nav class="overlay-menu">
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="#">Train a model</a></li>
+                <li><a href="/test">Test the model</a></li>
+                <li><a href="#">Some Demos</a></li>
+              </ul>
+            </nav>
+          </div>
+
+
+          <div class="clear"></div>
+
+
+        </div>
+
+      </nav>
+
+      <div class="home-section">
+
+        <canvas id="canvas"></canvas>
+
+        <div id="wrapper">
+
+
+          <div id="home-content">
+            <div id="home-text">
+              <div id="title">
+                <h2>Image Description Generation System</h2>
+                <h2>
+                  <span style='color: #00acd4'>Description</span>
+                  <span style='display: none; color: #755f93'>Generation</span>
+                  <span style='display: none; color: #c23e37'>Evaluation</span>
+                  <span style='display: none; color: #c76c17'>Demonstration</span>
+                </h2>
+
+                <h3>Let the computer tell what the given image is about !</h3>
+
+              </div>
+              <!-- [end #title] -->
+
+              <div class="local-scroll">
+                <a data-scroll href="#about" class="scroll-down">
+                  <i class="fa fa-chevron-down"></i>
+                </a>
+              </div>
+              <!-- [end #local-scroll] -->
+            </div>
+            <!-- [end #home-text] -->
+          </div>
+          <!-- [end #home-content] -->
+        </div>
+        <!-- [end #wrapper] -->
       </div>
+      <!-- [end .home-section] -->
+
+
+      <section class="page-section animated bkg-white" id="about">
+        <div class="container">
+
+          <div class="intro-body ">
+            <h2 class="">What is this system and what does it do ？</h2>
+            <p>Humans can summarize the content of images in sentences. But, how to make computers also have this
+              ability has become a novel research problem.
+              My project aims to explore such problems and propose solutions. This website is a part of my MSC project.
+              It visualizes the image description generation system developed by Yan Liu. As we known, image description
+              generation system is a special area of artificial intelligence, which attracted much attention in recent
+              years. It requires many related technologies of computer vision and natural language processing.
+              In short, this system aims to describe what the uploaded image is about, which means the system is able to
+              either map images to a candidate pool of sentence descriptions or to generate novel text descriptions for
+              input images.
+              See the navigation bar above, you can click on <b>TRAIN A MODEL</b> button to train a model. Or click on
+              <b>TEST THE MODEL</b> button to upload images and then the system will use pre-trained model which trained
+              by you or me to get the description of uploaded images.</p>
+          </div>
+
+        </div>
+      </section>
+      <!-- [end .page-section] -->
+
+      <section class="page-section animated bkg-gray" id="about">
+        <div class="container">
+
+          <div class="process-body">
+            <h2>About me and my project</h2>
+            <p>Hello, my name is <b>Yan Liu</b>. I am a PGT student in the Department of Computer Science at the
+              University of Manchester.
+              My supervisor is <b>Aphrodite Galata</b>. I implemented two ways to run my project. The first method is to
+              input commands in the terminal. The second method is to operat the system through this website.
+              If you want to see more details about my project, go to my github: <a
+                href="https://github.com/YanLiu96">YanLiu96</a>.
+              My email is <a href="mailto:yan.liu-25@student.manchester.ac.uk">yan.liu</a>.
+            </p>
+          </div>
+      </section>
+      <!-- [end .page-section] -->
+
+
     </div>
-    <div class="col-4">
-      <ul class="list-group  image-status">
-      <li class="list-group-item"># of file(s) <span class="badge badge-info image-count">0</span></li>
-      <li class="list-group-item">Total Size <span class="badge badge-info image-tot-size">0 Mb</span>
-        <div class="progress">
-  <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
-        <div class="max-size-limit"></div>
-      </li>
-    </ul>
-      <div class="alert alert-info" role="alert">
-        <span class="fa fa-exclamation-circle"></span> Important instructions
-</div>
-      <div class="image-action">
-        <!-- 按钮，一开始全部disable，选择图片后才可以点击 -->
-        <button type="button" disabled class="upload-start btn btn-outline-success btn-block"><i class="fa fa-cloud-upload"></i> Upload Image(s)</button>
-        <button type="button" disabled class="upload-clean btn btn-outline-danger btn-block"><i class="fa fa-ban"></i> Clear</button>
-      </div>
-    </div>
-  </div>
-  <div class="images-to-upload">
-    <ul>
-    </ul>
-  </div>
-</div>
-<!-- partial -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
-<script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
-<script src='https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js'></script>
-<script  src="../static/js/script.js"></script>
+    <!-- [end page] -->
+
+
+    <!-- [Script stiky menu ] -->
+    <script type="text/javascript">
+      window.addEventListener("scroll", function () {
+        if (window.pageYOffset > 50) {
+          document.getElementById("main-nav").className = "scrolling";
+        } else {
+          document.getElementById("main-nav").className = "";
+        }
+      })
+    </script>
+
+    <!-- [scrolling page] -->
+    <script type='text/javascript' src="https://cferdinandi.github.io/smooth-scroll/dist/js/smooth-scroll.js"></script>
+    <script type='text/javascript'>
+      smoothScroll.init({
+        speed: 1500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic' // Easing pattern to use
+      });
+    </script>
+
+
+  </body>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/wow/0.1.12/wow.min.js'></script>
+  <script src="../static/js/index.js"></script>
+
 </body>
+
 </html>
