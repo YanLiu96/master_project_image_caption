@@ -150,6 +150,8 @@
   $('#imageWgt').imageUploader({
     startUpload: files => {
       console.log('The number of uploaded images is: '+files.length)
+      var msg= document.getElementById("message");
+      msg.innerHTML='Evaluating, please wait';
       // files 的格式为：
       // Array (3)
       // 0 {imageid: 0, file: File}
@@ -173,7 +175,9 @@
         cache: false,
         processData: false,
         success: function (data) {
-          console.log('Success!');
+          if (data.status==1){
+            window.location.href ='/showresult';
+          }
         },
       });
 
@@ -182,6 +186,7 @@
         $('#imageWgt').imageUploader('updateStatus', errored);
       }, 2000);
     }
+
   });
 
 })();
