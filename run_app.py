@@ -6,6 +6,7 @@ warnings.filterwarnings("ignore")
 import matplotlib
 from flask import Flask
 from flask import render_template, request, jsonify
+import json
 from flask_cors import CORS
 from utils import caption_image_beam_search, visualize_att
 from test.discrible import caption_img
@@ -42,9 +43,9 @@ app = Flask(__name__)
 CORS(app)
 
 # # 设置静态文件缓存过期时间
-# #app.send_file_max_age_default = timedelta(seconds=1)
+app.send_file_max_age_default = timedelta(seconds=1)
 decoder,encoder, word_map, rev_word_map = models_init()
-
+caption_result=[]
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
@@ -58,8 +59,21 @@ def upload():
     message=''
     try:
         if request.method=='POST':
+            caption_result.clear()
             # delete all the privous uploaded files
-            folder= os.path.join(os.path.dirname(__file__),'static/images')
+            folder= os.path.join(os.path.dirname(__file__),'static/uploaded_img')
+            for filename in os.listdir(folder):
+                file_path = os.path.join(folder, filename)
+                try:
+                    if os.path.isfile(file_path) or os.path.islink(file_path):
+                        os.unlink(file_path)
+                    elif os.path.isdir(file_path):
+                        shutil.rmtree(file_path)
+                except Exception as e:
+                    print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+            # delete all the privous test results 
+            folder= os.path.join(os.path.dirname(__file__),'static/result_img')
             for filename in os.listdir(folder):
                 file_path = os.path.join(folder, filename)
                 try:
@@ -75,20 +89,7 @@ def upload():
                 print(message)
                 return render_template('index.html', messge=message)
             img_files=request.files.getlist('images')
-
-            # delete all the uploaded files
-            folder= os.path.join(os.path.dirname(__file__),'static/images')
-            for filename in os.listdir(folder):
-                file_path = os.path.join(folder, filename)
-                try:
-                    if os.path.isfile(file_path) or os.path.islink(file_path):
-                        os.unlink(file_path)
-                    elif os.path.isdir(file_path):
-                        shutil.rmtree(file_path)
-                except Exception as e:
-                    print('Failed to delete %s. Reason: %s' % (file_path, e))
             # check the format of image
-
             i =0
             for file in img_files:
                 if not (file and allowed_file(file.filename)):
@@ -98,22 +99,43 @@ def upload():
                     base_path= os.path.dirname(__file__)
                     #if IS_CACHE_IMG:
                     uploaded_img_name = secure_filename(file.filename)
-                    uploaded_img_path= os.path.join(base_path, 'static/images',uploaded_img_name)
+                    uploaded_img_path= os.path.join(base_path, 'static/uploaded_img',uploaded_img_name)
                     file.save(uploaded_img_path)
                     seq, alphas = caption_image_beam_search(encoder, decoder, uploaded_img_path, word_map, 5)
                     alphas = torch.FloatTensor(alphas)
                     captions = [rev_word_map[ind] for ind in seq]
-                    print(captions)
+                    caption_result.append(captions)
+                    #print(captions)
                     i=i+1
                     result_name='result_'+str(i)+'.png'
                     visualize_att(result_name, uploaded_img_path, seq, alphas, rev_word_map, True)
-            print(i)
             print('You have uploaded the images')
+            return jsonify({'status': 1})
+        else:
+            return render_template('upload.html')
     except:
         #上传的文件是其他文件改成jpg格式会报错
         message = 'something error,please make sure the uploaded file is in JPG format!'
         return render_template('upload.html', message=message)
-    return render_template('upload.html', message=message)
+
+@app.route('/showresult', methods=['GET'])
+def showresult():
+    img_src=[]
+    sentence_list=[]
+    folder= os.path.join(os.path.dirname(__file__),'static/result_img')
+    result_list=sorted(os.listdir(folder))
+    for filename in result_list:
+        print(filename)
+        file_path = os.path.join('../static/result_img', filename)
+        img_src.append(file_path)
+    for cap in caption_result:
+        sentence=''
+        for word in cap[1:-1]:
+            sentence= sentence + ' '+word
+        sentence_list.append(sentence)
+    print(img_src,sentence_list)
+
+    return render_template('showresult.html',results=zip(img_src, sentence_list))
 
 if __name__ == '__main__':
     app.debug=True
