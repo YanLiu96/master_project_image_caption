@@ -5,6 +5,9 @@ from prepare.word2vec import save_cap_vec
 from train.train import main_train
 from test.discrible import caption_img
 
+from subprocess import Popen, PIPE, CalledProcessError
+
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Yan Liu master project: let computer tell what the image is about')

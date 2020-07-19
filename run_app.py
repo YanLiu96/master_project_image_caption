@@ -2,10 +2,11 @@ import os,shutil
 import torch
 import json
 import warnings
+import subprocess
 warnings.filterwarnings("ignore")
 import matplotlib
 from flask import Flask
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, Response
 import json
 from flask_cors import CORS
 from utils import caption_image_beam_search, visualize_att
@@ -136,6 +137,19 @@ def showresult():
     print(img_src,sentence_list)
 
     return render_template('showresult.html',results=zip(img_src, sentence_list))
+
+# @app.route('/train')
+# def train():
+#     def begin():
+#         proc = subprocess.Popen(
+#             ['python main.py --control \'train\''],             #call something with a lot of output so we can see it
+#             shell=True,
+#             stdout=subprocess.PIPE,
+#             universal_newlines=True
+#         )
+#         for line in iter(proc.stdout.readline,''):
+#             yield line.rstrip() + '<br/>\n'
+#     return Response(begin(), mimetype='text/html')  # text/html is required for most browsers to show th$
 
 if __name__ == '__main__':
     app.debug=True
