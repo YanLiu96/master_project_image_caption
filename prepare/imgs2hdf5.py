@@ -28,7 +28,6 @@ def images_save_in_hdf5():
     #for imgae_name, image_captions in zip(test_images_names, test_images_captions):
     create_hdf5_file('test', test_images_names, test_images_captions)
 
-# http://docs.h5py.org/en/stable/quick.html
 def create_hdf5_file(type, imgaes_names, image_captions):
     start = time.time()
     with h5py.File(os.path.join('saved_data/hdf5_images', type + '_images.hdf5'), 'a') as f:

@@ -8,10 +8,11 @@ import matplotlib.cm as cm
 import skimage.transform
 import argparse
 import imageio
+import warnings
 from PIL import Image
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+warnings.filterwarnings("ignore")
 
 def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=3):
     """
@@ -29,12 +30,12 @@ def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=
 
     # Read image and process
     img = imageio.imread(image_path)
-    #img = imread(image_path)
+
     if len(img.shape) == 2:
         img = img[:, :, np.newaxis]
         img = np.concatenate([img, img, img], axis=2)
     img=np.array(Image.fromarray(img).resize((256,256)))
-    #img = imresize(img, (256, 256))
+    
     img = img.transpose(2, 0, 1)
     img = img / 255.
     img = torch.FloatTensor(img).to(device)
@@ -185,16 +186,6 @@ def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True):
 
 
 def caption_img(test_img_path):
-    # parser = argparse.ArgumentParser(description='Show, Attend, and Tell - Tutorial - Generate Caption')
-
-    # parser.add_argument('--img', '-i', help='path to image')
-    # parser.add_argument('--model', '-m', help='path to model')
-    # parser.add_argument('--word_map', '-wm', help='path to word map JSON')
-    # parser.add_argument('--beam_size', '-b', default=5, type=int, help='beam size for beam search')
-    # parser.add_argument('--dont_smooth', dest='smooth', action='store_false', help='do not smooth alpha overlay')
-
-    # args = parser.parse_args()
-
     # Load model
     checkpoint = torch.load('saved_data/trained_models/best_checkpoint_trained_models.pth.tar', map_location=str(device))
     decoder = checkpoint['decoder']

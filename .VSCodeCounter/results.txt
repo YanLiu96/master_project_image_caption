@@ -1,0 +1,73 @@
+Date : 2020-07-19 14:12:06
+Directory : /Users/master_project_image_caption
+Total : 35 files,  3363 codes, 674 comments, 540 blanks, all 4577 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| CSS        |          4 |      1,209 |         50 |        118 |      1,377 |
+| Python     |         19 |      1,027 |        352 |        298 |      1,677 |
+| HTML       |          5 |        439 |         39 |         74 |        552 |
+| JavaScript |          5 |        341 |        233 |         45 |        619 |
+| JSON       |          1 |        327 |          0 |          1 |        328 |
+| toml       |          1 |         20 |          0 |          4 |         24 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                            | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                               |         35 |      3,363 |        674 |        540 |      4,577 |
+| evaluate                                                        |          2 |         98 |         35 |         41 |        174 |
+| models                                                          |          3 |        103 |         77 |         36 |        216 |
+| prepare                                                         |          5 |        155 |         34 |         31 |        220 |
+| static                                                          |          9 |      1,550 |        283 |        163 |      1,996 |
+| static/css                                                      |          4 |      1,209 |         50 |        118 |      1,377 |
+| static/js                                                       |          5 |        341 |        233 |         45 |        619 |
+| templates                                                       |          5 |        439 |         39 |         74 |        552 |
+| test                                                            |          2 |        126 |         43 |         43 |        212 |
+| train                                                           |          3 |        282 |        117 |         88 |        487 |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                        | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/master_project_image_caption/Pipfile                     | toml       |         20 |          0 |          4 |         24 |
+| /Users/master_project_image_caption/Pipfile.lock                | JSON       |        327 |          0 |          1 |        328 |
+| /Users/master_project_image_caption/evaluate/__init__.py        | Python     |          0 |          0 |          1 |          1 |
+| /Users/master_project_image_caption/evaluate/evaluate.py        | Python     |         98 |         35 |         40 |        173 |
+| /Users/master_project_image_caption/main.py                     | Python     |         28 |          0 |          6 |         34 |
+| /Users/master_project_image_caption/models/__init__.py          | Python     |          0 |          0 |          1 |          1 |
+| /Users/master_project_image_caption/models/decoder_Attention.py | Python     |         79 |         63 |         26 |        168 |
+| /Users/master_project_image_caption/models/encoder.py           | Python     |         24 |         14 |          9 |         47 |
+| /Users/master_project_image_caption/prepare/__init__.py         | Python     |          0 |          0 |          1 |          1 |
+| /Users/master_project_image_caption/prepare/data_download.py    | Python     |         17 |          6 |          5 |         28 |
+| /Users/master_project_image_caption/prepare/data_preprocess.py  | Python     |         69 |          8 |         14 |         91 |
+| /Users/master_project_image_caption/prepare/imgs2hdf5.py        | Python     |         35 |         13 |          6 |         54 |
+| /Users/master_project_image_caption/prepare/word2vec.py         | Python     |         34 |          7 |          5 |         46 |
+| /Users/master_project_image_caption/run_app.py                  | Python     |        117 |         23 |         16 |        156 |
+| /Users/master_project_image_caption/static/css/demo.css         | CSS        |         29 |          0 |          0 |         29 |
+| /Users/master_project_image_caption/static/css/index.css        | CSS        |        505 |         25 |         53 |        583 |
+| /Users/master_project_image_caption/static/css/showresults.css  | CSS        |         67 |          2 |         12 |         81 |
+| /Users/master_project_image_caption/static/css/upload.css       | CSS        |        608 |         23 |         53 |        684 |
+| /Users/master_project_image_caption/static/js/demo.js           | JavaScript |         14 |          0 |          0 |         14 |
+| /Users/master_project_image_caption/static/js/index.js          | JavaScript |        296 |         44 |         34 |        374 |
+| /Users/master_project_image_caption/static/js/nav.js            | JavaScript |          6 |          0 |          0 |          6 |
+| /Users/master_project_image_caption/static/js/showresults.js    | JavaScript |         15 |          9 |          9 |         33 |
+| /Users/master_project_image_caption/static/js/upload.js         | JavaScript |         10 |        180 |          2 |        192 |
+| /Users/master_project_image_caption/templates/button.html       | HTML       |         20 |          2 |          9 |         31 |
+| /Users/master_project_image_caption/templates/demo.html         | HTML       |         79 |          6 |          8 |         93 |
+| /Users/master_project_image_caption/templates/index.html        | HTML       |        143 |         21 |         42 |        206 |
+| /Users/master_project_image_caption/templates/showresult.html   | HTML       |         90 |          5 |          7 |        102 |
+| /Users/master_project_image_caption/templates/upload.html       | HTML       |        107 |          5 |          8 |        120 |
+| /Users/master_project_image_caption/test.py                     | Python     |          6 |          1 |          2 |          9 |
+| /Users/master_project_image_caption/test/__init__.py            | Python     |          0 |          0 |          1 |          1 |
+| /Users/master_project_image_caption/test/discrible.py           | Python     |        126 |         43 |         42 |        211 |
+| /Users/master_project_image_caption/train/__init__.py           | Python     |          0 |          0 |          1 |          1 |
+| /Users/master_project_image_caption/train/dataset.py            | Python     |         32 |         15 |         14 |         61 |
+| /Users/master_project_image_caption/train/train.py              | Python     |        250 |        102 |         73 |        425 |
+| /Users/master_project_image_caption/utils.py                    | Python     |        112 |         22 |         35 |        169 |
+| Total                                                           |            |      3,363 |        674 |        540 |      4,577 |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+

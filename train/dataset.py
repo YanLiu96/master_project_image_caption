@@ -18,41 +18,40 @@ class MyDataset(Dataset):
         self.split = split
         assert self.split in {'train', 'val', 'test'}
 
-        # Open hdf5 file where images are stored
+        # Open hdf5 file where train/val/test images are stored
         self.h = h5py.File(data_folder+'hdf5_images/'+self.split+'_images.hdf5', 'r')
-        self.imgs = self.h['images']
+        self.imgs = self.h['images'] # get the images data
+        self.cpi = self.h.attrs['captions_per_image'] # get the number of captions for one image (5)
 
-        # Captions per image
-        self.cpi = self.h.attrs['captions_per_image']
-
-        # Load encoded captions (completely into memory)
+        # Open caption (annotation) for images
         with open(data_folder+'cap2vec/'+self.split+'_cap_vec.json', 'r') as j:
             self.captions = json.load(j)
 
-        # Load caption lengths (completely into memory)
+        # Get the number of words for each caption (annotation)
         with open(data_folder+'cap2vec/'+self.split+'_cap_len.json', 'r') as j:
             self.caplens = json.load(j)
 
-        # PyTorch transformation pipeline for the image (normalizing, etc.)
-        self.transform = transform
+        self.transform = transform # PyTorch transfoem instance
 
-        # Total number of datapoints
+        # the size of the train/val/test dataset
         self.dataset_size = len(self.captions)
 
     def __getitem__(self, i):
-        # Remember, the Nth caption corresponds to the (N // captions_per_image)th image
+        """
+        Get the i-th caption and the image (which is i/5 ) that corresponds to it
+        """
+        # turn the i/5-th image to tensor format
         img = torch.FloatTensor(self.imgs[i // self.cpi] / 255.)
+
         if self.transform is not None:
             img = self.transform(img)
 
-        caption = torch.LongTensor(self.captions[i])
+        caption = torch.LongTensor(self.captions[i]) #turn the i-th caption to tensor format
+        caplen = torch.LongTensor([self.caplens[i]]) #turn the i-th caption length to tensor format
 
-        caplen = torch.LongTensor([self.caplens[i]])
-
-        if self.split is 'train':
+        if self.split is 'train': # for trainning
             return img, caption, caplen
-        else:
-            # For validation of testing, also return all 'captions_per_image' captions to find BLEU-4 score
+        else: # For validation and testing,also return all the 5 captions for the image to get the BLEU-4 score
             all_captions = torch.LongTensor(
                 self.captions[((i // self.cpi) * self.cpi):(((i // self.cpi) * self.cpi) + self.cpi)])
             return img, caption, caplen, all_captions

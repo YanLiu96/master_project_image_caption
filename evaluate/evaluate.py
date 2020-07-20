@@ -1,4 +1,5 @@
 # evaluate the performance of model on test dataser: get the BLEU-1 to BLEU-4 scores
+# METEOR ROUGE CIDEr
 import torch.backends.cudnn as cudnn
 import torch.optim
 import torch.utils.data

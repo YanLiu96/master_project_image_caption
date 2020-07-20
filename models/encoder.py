@@ -11,7 +11,7 @@ class Encoder(nn.Module):
 
         resnet = torchvision.models.resnet101(pretrained=True)  # pretrained ImageNet ResNet-101
 
-        # Remove linear and pool layers (since we're not doing classification)
+        # Remove linear and pool layers because it is not doing classification)
         modules = list(resnet.children())[:-2]
         self.resnet = nn.Sequential(*modules)
 
@@ -22,9 +22,9 @@ class Encoder(nn.Module):
 
     def forward(self, images):
         """
-        Forward propagation.
+        Forward
 
-        :param images: images, a tensor of dimensions (batch_size, 3, image_size, image_size)
+        :param images: images tensor: (batch_size, 3, image_size, image_size)
         :return: encoded images
         """
         out = self.resnet(images)  # (batch_size, 2048, image_size/32, image_size/32)
