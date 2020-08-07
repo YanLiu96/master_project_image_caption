@@ -9,7 +9,7 @@ class Attention(nn.Module):
     Attention Network.
     """
 
-    def __init__(self, encoder_dim, decoder_dim, attention_dim):
+    def __init__(self, encoder_dim, decoder_dim, attention_dim): #(self, 2048, 512, 512)
         """
         :param encoder_dim: feature size of encoded images
         :param decoder_dim: size of decoder's RNN
@@ -55,16 +55,16 @@ class DecoderWithAttention(nn.Module):
         """
         super(DecoderWithAttention, self).__init__()
 
-        self.encoder_dim = encoder_dim
-        self.attention_dim = attention_dim
-        self.embed_dim = embed_dim
-        self.decoder_dim = decoder_dim
+        self.encoder_dim = encoder_dim # 2048
+        self.attention_dim = attention_dim # 512
+        self.embed_dim = embed_dim # 512
+        self.decoder_dim = decoder_dim # 512
         self.vocab_size = vocab_size
-        self.dropout = dropout
+        self.dropout = dropout # 0.5
 
-        self.attention = Attention(encoder_dim, decoder_dim, attention_dim)  # attention network
+        self.attention = Attention(encoder_dim, decoder_dim, attention_dim)  # attention network (2048, 512, 512)
 
-        self.embedding = nn.Embedding(vocab_size, embed_dim)  # embedding layer
+        self.embedding = nn.Embedding(vocab_size, embed_dim)  # embedding layer vocab_size tensor, size 512
         self.dropout = nn.Dropout(p=self.dropout)
         self.decode_step = nn.LSTMCell(embed_dim + encoder_dim, decoder_dim, bias=True)  # decoding LSTMCell
         self.init_h = nn.Linear(encoder_dim, decoder_dim)  # linear layer to find initial hidden state of LSTMCell
@@ -129,7 +129,7 @@ class DecoderWithAttention(nn.Module):
         encoder_out = encoder_out.view(batch_size, -1, encoder_dim)  # (batch_size, num_pixels, encoder_dim)
         num_pixels = encoder_out.size(1)
 
-        # Sort input data by decreasing lengths; why? apparent below
+        # Sort input data by decreasing lengths
         caption_lengths, sort_ind = caption_lengths.squeeze(1).sort(dim=0, descending=True)
         encoder_out = encoder_out[sort_ind]
         encoded_captions = encoded_captions[sort_ind]

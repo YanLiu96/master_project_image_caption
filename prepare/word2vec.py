@@ -16,7 +16,6 @@ def save_cap_vec(max_cap_len):
     cap2vec('val',val_images_captions, max_cap_len)
     cap2vec('test',test_images_captions, max_cap_len)
 
-# 后续可以使用torch自带的库来处理
 # save caption vectors
 def cap2vec(type, dataset, max_cap_len):
     cap_vec=[]

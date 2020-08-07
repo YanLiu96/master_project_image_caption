@@ -27,7 +27,7 @@ if __name__ == '__main__':
         main_train()
     elif args.test:
         caption_img(args.test)
-    elif args.evaluate:
-        evaluate(args.evaluate)
+    elif args.evaluate == 'pre_save':
+        evaluate(args.evaluate,3)
     else:
         print('Choose the things you want to do, you can use -h to get help')

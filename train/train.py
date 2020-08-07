@@ -243,7 +243,6 @@ def train(train_loader, encoder, decoder, criterion, encoder_optimizer, decoder_
     :param criterion: loss function
     :param encoder_optimizer: optimizer to update encoder's weights (if fine-tuning)
     """
-    print('5')
     decoder.train()  # train mode (dropout and batchnorm is used)
     encoder.train()
 

@@ -163,6 +163,10 @@ def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True):
     image = image.resize([14 * 24, 14 * 24], Image.LANCZOS)
 
     words = [rev_word_map[ind] for ind in seq]
+    sentence=''
+    for word in words[1:-1]:
+        sentence = sentence+' '+ word
+    print(sentence)
 
     for t in range(len(words)):
         if t > 50:
@@ -182,6 +186,7 @@ def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True):
             plt.imshow(alpha, alpha=0.8)
         plt.set_cmap(cm.Greys_r)
         plt.axis('off')
+    plt.suptitle("\n"+sentence,color='red')
     plt.show()
 
 

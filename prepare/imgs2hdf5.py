@@ -37,13 +37,11 @@ def create_hdf5_file(type, imgaes_names, image_captions):
         bar = ChargingBar('Processing '+type+' images in hdf5 file', max=len(imgaes_names))
         for i, path in enumerate(imgaes_names):
             img = imageio.imread(path)
-            #img = imread(path)
             if len(img.shape) == 2:
                 img = img[:, :, np.newaxis]
                 img = np.concatenate([img, img, img], axis=2)
             
             img=np.array(Image.fromarray(img).resize((256,256)))
-            #img = imresize(img, (256, 256))
             img = img.transpose(2, 0, 1)
             assert img.shape == (3, 256, 256)
             assert np.max(img) <= 255

@@ -146,6 +146,10 @@ def visualize_att(result_name, image_path, seq, alphas, rev_word_map, smooth=Tru
 
     words = [rev_word_map[ind] for ind in seq]
 
+    sentence=''
+    for word in words[1:-1]:
+        sentence = sentence+' '+ word
+
     for t in range(len(words)):
         if t > 50:
             break
@@ -165,5 +169,6 @@ def visualize_att(result_name, image_path, seq, alphas, rev_word_map, smooth=Tru
         plt.set_cmap(cm.Greys_r)
         plt.axis('off')
     result_name='static/result_img/'+result_name
+    plt.suptitle("\n"+sentence,color='red')
     plt.savefig(result_name)
     plt.close()
