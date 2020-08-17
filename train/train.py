@@ -316,7 +316,10 @@ def train(train_loader, encoder, decoder, criterion, encoder_optimizer, decoder_
                                                                           batch_time=batch_time,
                                                                           data_time=data_time, loss=losses,
                                                                           top5=top5accs))
-
+    # get the loss and accuracy of training
+    print('\n * Training: LOSS - {loss.avg:.3f}, TOP-5 ACCURACY - {top5.avg:.3f}\n'.format(
+                loss=losses,
+                top5=top5accs))
 
 def validate(val_loader, encoder, decoder, criterion):
     """
@@ -415,7 +418,7 @@ def validate(val_loader, encoder, decoder, criterion):
         bleu4 = corpus_bleu(references, hypotheses)
 
         print(
-            '\n * LOSS - {loss.avg:.3f}, TOP-5 ACCURACY - {top5.avg:.3f}, BLEU-4 - {bleu}\n'.format(
+            '\n * Validation: LOSS - {loss.avg:.3f}, TOP-5 ACCURACY - {top5.avg:.3f}, BLEU-4 - {bleu}\n'.format(
                 loss=losses,
                 top5=top5accs,
                 bleu=bleu4))

@@ -26,7 +26,7 @@ def allowed_file(filename):
 
 def models_init():
     # Load model
-    checkpoint = torch.load('saved_data/trained_models/best_checkpoint_trained_models.pth.tar', map_location=str(device))
+    checkpoint = torch.load('saved_data/trained_models/res152_best_checkpoint_trained_models.pth.tar', map_location=str(device))
     decoder = checkpoint['decoder']
     decoder = decoder.to(device)
     decoder.eval()

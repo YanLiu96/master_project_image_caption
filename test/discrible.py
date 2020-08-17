@@ -175,15 +175,15 @@ def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True):
 
         plt.text(0, 1, '%s' % (words[t]), color='black', backgroundcolor='white', fontsize=12)
         plt.imshow(image)
-        current_alpha = alphas[t, :]
+        #current_alpha = alphas[t, :]
         if smooth:
-            alpha = skimage.transform.pyramid_expand(current_alpha.numpy(), upscale=24, sigma=8)
+            alpha = skimage.transform.pyramid_expand(alphas[t, :].numpy(), upscale=16, sigma=20)
         else:
-            alpha = skimage.transform.resize(current_alpha.numpy(), [14 * 24, 14 * 24])
+            alpha = skimage.transform.resize(alphas[t, :].numpy(), [14 * 24, 14 * 24])
         if t == 0:
             plt.imshow(alpha, alpha=0)
         else:
-            plt.imshow(alpha, alpha=0.8)
+            plt.imshow(alpha, alpha=0.6)
         plt.set_cmap(cm.Greys_r)
         plt.axis('off')
     plt.suptitle("\n"+sentence,color='red')
