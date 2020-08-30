@@ -16,13 +16,7 @@ warnings.filterwarnings("ignore")
 
 def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=3):
     """
-    Reads an image and captions it with beam search.
-    :param encoder: encoder model
-    :param decoder: decoder model
-    :param image_path: path to image
-    :param word_map: word map
-    :param beam_size: number of sequences to consider at each decode-step
-    :return: caption, weights for visualization
+    Reads an image and describle it with beam search.
     """
 
     k = beam_size
@@ -152,12 +146,6 @@ def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=
 def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True):
     """
     Visualizes caption with weights at every word.
-    Adapted from paper authors' repo: https://github.com/kelvinxu/arctic-captions/blob/master/alpha_visualization.ipynb
-    :param image_path: path to image that has been captioned
-    :param seq: caption
-    :param alphas: weights
-    :param rev_word_map: reverse word mapping, i.e. ix2word
-    :param smooth: smooth weights?
     """
     image = Image.open(image_path)
     image = image.resize([14 * 24, 14 * 24], Image.LANCZOS)
@@ -167,12 +155,10 @@ def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True):
     for word in words[1:-1]:
         sentence = sentence+' '+ word
     print(sentence)
-
     for t in range(len(words)):
         if t > 50:
             break
         plt.subplot(np.ceil(len(words) / 5.), 5, t + 1)
-
         plt.text(0, 1, '%s' % (words[t]), color='black', backgroundcolor='white', fontsize=12)
         plt.imshow(image)
         #current_alpha = alphas[t, :]
@@ -192,7 +178,7 @@ def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True):
 
 def caption_img(test_img_path):
     # Load model
-    checkpoint = torch.load('saved_data/trained_models/best_checkpoint_trained_models.pth.tar', map_location=str(device))
+    checkpoint = torch.load('saved_data/trained_models/optimal_model.pth.tar', map_location=str(device))
     decoder = checkpoint['decoder']
     decoder = decoder.to(device)
     decoder.eval()
@@ -209,8 +195,7 @@ def caption_img(test_img_path):
     seq, alphas = caption_image_beam_search(encoder, decoder, test_img_path, word_map, 5)
     alphas = torch.FloatTensor(alphas)
     captions = [rev_word_map[ind] for ind in seq]
-
-    # print(seq) 获得句子对应的向量
+    
     # Visualize caption and attention of best sequence
     visualize_att(test_img_path, seq, alphas, rev_word_map, True)
     return captions

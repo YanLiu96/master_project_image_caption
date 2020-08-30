@@ -1,6 +1,8 @@
 # evaluate the performance of model on test dataser: get the BLEU-1 to BLEU-4 scores
-# METEOR ROUGE CIDEr
-
+# METEOR ROUGE CIDEr 
+# Time: 20 min 
+# resnet101 beam search 3:{'Bleu_1': 0.7077848412851242, 'Bleu_2': 0.5352381686387186, 'Bleu_3': 0.4011979950852196, 'Bleu_4': 0.30209710516184746, 'METEOR': 0.24550618207549812, 'ROUGE_L': 0.5225619634651749, 'CIDEr': 0.9404193445802925}
+# resnet152 beam search 1:{'Bleu_1': 0.7067479161146974, 'Bleu_2': 0.532390949850118, 'Bleu_3': 0.3880338877519845, 'Bleu_4': 0.2819539230760915, 'METEOR': 0.2451758871431663, 'ROUGE_L': 0.5203647122740788, 'CIDEr': 0.9378385373606865}
 import torch.backends.cudnn as cudnn
 import torch.optim
 import torch.utils.data
@@ -12,33 +14,16 @@ from evaluate.pycocoevalcap.bleu.bleu import Bleu
 from evaluate.pycocoevalcap.rouge.rouge import Rouge
 from evaluate.pycocoevalcap.cider.cider import Cider
 from evaluate.pycocoevalcap.meteor.meteor import Meteor
+#from evaluate.pycocoevalcap.spice.spice import Spice
 
 from train.dataset import *
-from nltk.translate.bleu_score import corpus_bleu
+#from nltk.translate.bleu_score import corpus_bleu
 from tqdm import tqdm
-
-# Parameters
-bleu1_weight = (1.0/1.0, )
-bleu2_weight = (1.0/2.0, 1.0/2.0,)
-bleu3_weight = (1.0/3.0, 1.0/3.0, 1.0/3.0,)
-bleu5_weight = (1.0/5.0, 1.0/5.0, 1.0/5.0, 1.0/5.0, 1.0/5.0,)
 
 hyp={}
 ref={}
 data_folder = '/saved_data'
 data_name = 'trained_models'
-checkpoint = 'saved_data/trained_models/best_checkpoint_trained_models.pth.tar'
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-cudnn.benchmark = True
-
-# Load model
-checkpoint = torch.load(checkpoint,map_location=str(device))
-decoder = checkpoint['decoder']
-decoder = decoder.to(device)
-decoder.eval()
-encoder = checkpoint['encoder']
-encoder = encoder.to(device)
-encoder.eval()
 
 # Load word map (word2ix)
 with open('saved_data/word2index/word2idx.json', 'r') as j:
@@ -60,7 +45,8 @@ def calc_scores(ref, hypo):
         (Bleu(4), ["Bleu_1", "Bleu_2", "Bleu_3", "Bleu_4"]),
         (Meteor(),"METEOR"),
         (Rouge(), "ROUGE_L"),
-        (Cider(), "CIDEr")
+        (Cider(), "CIDEr")#,
+        #(Spice(), "SPICE")
     ]
     final_scores = {}
     for scorer, method in scorers:
@@ -74,13 +60,24 @@ def calc_scores(ref, hypo):
 
 def evaluate(pre_save, beam_size):
     if pre_save=='pre_save':
-        with open('saved_data/evaluation/test_hyp.json', 'r') as j:
+        with open('saved_data/ft_152/ft_resnet152_bs1_test_hyp.json', 'r') as j:
             hyp = json.load(j)
-        with open('saved_data/evaluation/test_ref.json', 'r') as j:
+        with open('saved_data/ft_152/ft_resnet152_bs1_test_ref.json', 'r') as j:
             ref = json.load(j)
+        print('Begin evaluation:')
         print(calc_scores(ref,hyp))
-        #{'Bleu_1': 0.7077848412851242, 'Bleu_2': 0.5352381686387186, 'Bleu_3': 0.4011979950852196, 'Bleu_4': 0.30209710516184746, 'METEOR': 0.24550618207549812, 'ROUGE_L': 0.5225619634651749, 'CIDEr': 0.9404193445802925}
-    else:   
+    else:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        cudnn.benchmark = True
+        checkpoint = 'saved_data/trained_models/resnet152_best_checkpoint_trained_models.pth.tar'
+        # Load model
+        checkpoint = torch.load(checkpoint,map_location=str(device))
+        decoder = checkpoint['decoder']
+        decoder = decoder.to(device)
+        decoder.eval()
+        encoder = checkpoint['encoder']
+        encoder = encoder.to(device)
+        encoder.eval()
         # DataLoader
         loader = torch.utils.data.DataLoader(
             MyDataset('saved_data/', 'test', transform=transforms.Compose([normalize])),
@@ -92,7 +89,7 @@ def evaluate(pre_save, beam_size):
 
         # For each image
         for i, (image, caps, caplens, allcaps) in enumerate(
-                tqdm(loader, desc="Evaluating the test dataset with beam size: " + beam_size)):
+                tqdm(loader, desc="Evaluation on the test dataset")):
             img_id =i
             k = int(beam_size)
             image = image.to(device)  # (1, 3, 256, 256)
@@ -212,6 +209,5 @@ def evaluate(pre_save, beam_size):
         with open(os.path.join('saved_data/evaluation','test_hyp.json'),'w') as f1:
             json.dump(hyp, f1)
         print(calc_scores(ref,hyp))
-        bleu4 = corpus_bleu(references, hypotheses)
-
-        print("\nBLEU-4 score is %.4f." %bleu4)
+        #bleu4 = corpus_bleu(references, hypotheses)
+        #print("\nBLEU-4 score is %.4f." %bleu4)

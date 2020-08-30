@@ -23,14 +23,16 @@ def get_stanford_models():
     # Only download file if file does not yet exist. Else: do nothing
     if not os.path.exists(jar_name):
         print('Downloading {} for SPICE ...'.format(JAR))
+        print('/'.join([CORENLP, JAR]))
         url = 'http://nlp.stanford.edu/software/{}.zip'.format(CORENLP)
         zip_file, headers = urlretrieve(url, reporthook=print_progress)
         print()
         print('Extracting {} ...'.format(JAR))
-        file_name = os.path.join(CORENLP, JAR)
+        file_name = os.path.join(CORENLP, JAR) #stanford-corenlp-full-2015-12-09/stanford-corenlp-3.6.0
+
         # file names in zip use '/' separator regardless of OS
-        zip_file_name = '/'.join([CORENLP, JAR])
-        target_name = os.path.join(SPICEDIR, SPICELIB, JAR)
+        zip_file_name = '/'.join([CORENLP, JAR]) #stanford-corenlp-full-2015-12-09/stanford-corenlp-3.6.0
+        target_name = os.path.join(SPICEDIR, SPICELIB, JAR) # ...evaluate/pycocoevalcap/spice/lib/stanford-corenlp-3.6.0
         for filef in ['{}.jar', '{}-models.jar']:
             ZipFile(zip_file).extract(filef.format(zip_file_name), SPICEDIR)
             os.rename(os.path.join(SPICEDIR, filef.format(file_name)),

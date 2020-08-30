@@ -26,7 +26,7 @@ def allowed_file(filename):
 
 def models_init():
     # Load model
-    checkpoint = torch.load('saved_data/trained_models/res152_best_checkpoint_trained_models.pth.tar', map_location=str(device))
+    checkpoint = torch.load('saved_data/trained_models/optimal_model.pth.tar', map_location=str(device))
     decoder = checkpoint['decoder']
     decoder = decoder.to(device)
     decoder.eval()
@@ -138,18 +138,20 @@ def showresult():
 
     return render_template('showresult.html',results=zip(img_src, sentence_list))
 
-# @app.route('/train')
-# def train():
-#     def begin():
-#         proc = subprocess.Popen(
-#             ['python main.py --control \'train\''],             #call something with a lot of output so we can see it
-#             shell=True,
-#             stdout=subprocess.PIPE,
-#             universal_newlines=True
-#         )
-#         for line in iter(proc.stdout.readline,''):
-#             yield line.rstrip() + '<br/>\n'
-#     return Response(begin(), mimetype='text/html')  # text/html is required for most browsers to show th$
+    # def begin():
+    #     proc = subprocess.Popen(
+    #         ['python main.py --control \'train\''],             #call something with a lot of output so we can see it
+    #         shell=True,
+    #         stdout=subprocess.PIPE,
+    #         universal_newlines=True
+    #     )
+    #     for line in iter(proc.stdout.readline,''):
+    #         yield line.rstrip() + '<br/>\n'
+    # return Response(begin(), mimetype='text/html')  # text/html is required for most browsers to show th$
+
+@app.route('/resources', methods=['GET'])
+def downloadresources():
+    return render_template('resource.html')
 
 if __name__ == '__main__':
     app.debug=True

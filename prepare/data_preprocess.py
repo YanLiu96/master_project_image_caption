@@ -53,7 +53,6 @@ def split_dataset(caption_file, max_caption_len):
         len(test_images_names) == len(test_images_captions) # 5000
     except Exception as e:
         print(e)
-
     print('--Coco dataset has already been splited into train, val, test subsets--')
     print('--The length of training set is %s --' %len(train_images_names))
     print('--The length of testing set is %s --' %len(test_images_names))

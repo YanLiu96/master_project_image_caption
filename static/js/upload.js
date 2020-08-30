@@ -151,7 +151,7 @@
     startUpload: files => {
       console.log('The number of uploaded images is: '+files.length)
       var msg= document.getElementById("message");
-      msg.innerHTML='Evaluating, please wait';
+      msg.innerHTML='The results are now being generated, please wait a moment!';
       // files 的格式为：
       // Array (3)
       // 0 {imageid: 0, file: File}

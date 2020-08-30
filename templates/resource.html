@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Some resources provided for the project </title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="../static/css/upload.css">
+</head>
+
+<body>
+  <nav id="main-nav">
+    <div class="full-wrapper relative">
+      <div id="nav-menu-wrap">
+        <div id="nav-page-section">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li>
+          </ul>
+        </div>
+        <div class="separator-menu"></div>
+
+        <!-- [end #nav-section] -->
+        <div id="nav-tools-section">
+          <ul>
+            <li><a href="/resources" class="signin-btn-nav">Train a model</a></li>
+            <li><a href="/test" class="signin-btn-nav">Test the model</a></li>
+            <li><a href="/demo" class="signin-btn-nav">Some Demos</a></li>
+          </ul>
+        </div>
+
+        <!-- [end #nav-tools-section] -->
+      </div>
+
+      <!-- humber menu & overlay menu-->
+      <div class="button_container" id="toggle">
+        <span class="top"></span>
+        <span class="middle"></span>
+        <span class="bottom"></span>
+      </div>
+
+      <div class="overlay" id="overlay">
+        <nav class="overlay-menu">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="#">Train a model</a></li>
+            <li><a href="/test">Test the model</a></li>
+            <li><a href="/demo">Some Demos</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </nav>
+
+  <!-- [Script stiky menu ] -->
+  <script type="text/javascript">
+    window.addEventListener("scroll", function () {
+      if (window.pageYOffset > 50) {
+        document.getElementById("main-nav").className = "scrolling";
+      } else {
+        document.getElementById("main-nav").className = "";
+      }
+    })
+  </script>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
+  <!--<script src='../static/js/jquery-ui.js'></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
+  <script src='https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js'></script>
+  <script src="../static/js/upload.js"></script>
+  <script src="../static/js/nav.js"></script>
+</body>
+
+</html>
