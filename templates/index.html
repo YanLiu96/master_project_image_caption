@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ <!-- Modified from Codepenio， thank Codepen for providing the web design-->
 <head>
   <meta charset="UTF-8">
   <title>Let computer tell what the image is about - Yan Liu Project</title>
@@ -37,11 +37,11 @@
 
         <div class="full-wrapper relative">
 
-          <!-- 
+          
         <div id="nav-logo-wrap">
           <a href="/"><img src="https://assets.manchester.ac.uk/corporate/images/design/logo-university-of-manchester.png" alt="Veruscript"></a>
         </div>
-        -->
+       
           <div id="nav-menu-wrap">
             <div id="nav-page-section">
               <ul>
@@ -75,7 +75,7 @@
               <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/#about">About</a></li>
-                <li><a href="#">Train a model</a></li>
+                <li><a href="/resources">Resources</a></li>
                 <li><a href="/test">Test the model</a></li>
                 <li><a href="/demo">Some Demos</a></li>
               </ul>
@@ -135,17 +135,15 @@
           <div class="intro-body ">
             <h2 class="">What is this system and what does it do ？</h2>
             <p>Humans can summarize the content of images in sentences. But, how to make computers also have this
-              ability has become a novel research problem.
-              My project aims to explore such problems and propose solutions. This website is a part of my MSC project.
-              It visualizes the image description generation system developed by Yan Liu. As we known, image description
-              generation system is a special area of artificial intelligence, which attracted much attention in recent
-              years. It requires many related technologies of computer vision and natural language processing.
-              In short, this system aims to describe what the uploaded image is about, which means the system is able to
-              either map images to a candidate pool of sentence descriptions or to generate novel text descriptions for
-              input images.
-              See the navigation bar above, you can click on <b>TRAIN A MODEL</b> button to train a model. Or click on
-              <b>TEST THE MODEL</b> button to upload images and then the system will use pre-trained model which trained
-              by you or me to get the description of uploaded images.</p>
+              ability has become a novel research problem.My project aims to explore such problems and propose an interactive system. This website is a part of my MSC project in the University of Manchester.</p>
+            <p>
+              The system architecture has three layers, including a visual-language model layer that contains Encoder (Resnet 101 or Resnet152) and Decoder (LSTM) with hard attention. 
+              A server layer that implements user interaction with the model layer. A web layer that connects designed web pages (in here!).
+            </p>
+              <p>
+              See the navigation bar above, you can click on <b>Resources</b> button to find some necessary resources like pretrained model, source code, experimental data. 
+              Click on <b>TEST THE MODEL</b> button to upload one or more images and then the system will use pre-trained fine-tuned model which trained by me to get the description of uploaded images (may take some time). Click on <b>Some Demos</b> button to view the results of some test pictures being tested by the model. Test images are from the COCO and Flick30K data sets.
+            </p>
           </div>
 
         </div>
@@ -160,7 +158,9 @@
             <p>Hello, my name is <b>Yan Liu</b>. I am a PGT student in the Department of Computer Science at the
               University of Manchester.
               My supervisor is <b>Aphrodite Galata</b>. I implemented two ways to run my project. The first method is to
-              input commands in the terminal. The second method is to operat the system through this website.
+              download the source code and input commands in the terminal. The second method is obtain the images' description through this website.
+            </p>
+              <p>
               If you want to see more details about my project, go to my github: <a
                 href="https://github.com/YanLiu96">YanLiu96</a>.
               My email is <a href="mailto:yan.liu-25@student.manchester.ac.uk">yan.liu</a>.
