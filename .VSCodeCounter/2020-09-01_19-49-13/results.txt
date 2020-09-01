@@ -1,0 +1,97 @@
+Date : 2020-09-01 19:49:13
+Directory : /Users/master_project_image_caption
+Total : 51 files,  18581 codes, 2945 comments, 3821 blanks, all 25347 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |          7 |     13,987 |      2,323 |      3,123 |     19,433 |
+| CSS        |          5 |      1,875 |         55 |        118 |      2,048 |
+| Python     |         30 |      1,757 |        521 |        478 |      2,756 |
+| HTML       |          6 |        570 |         46 |         84 |        700 |
+| JSON       |          1 |        327 |          0 |          1 |        328 |
+| Markdown   |          1 |         45 |          0 |         13 |         58 |
+| toml       |          1 |         20 |          0 |          4 |         24 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                    | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                       |         51 |     18,581 |      2,945 |      3,821 |     25,347 |
+| evaluate                                                                                |         15 |        851 |        243 |        243 |      1,337 |
+| evaluate/pycocoevalcap                                                                  |         13 |        720 |        195 |        207 |      1,122 |
+| evaluate/pycocoevalcap/bleu                                                             |          2 |        202 |         36 |         75 |        313 |
+| evaluate/pycocoevalcap/cider                                                            |          2 |        150 |         64 |         34 |        248 |
+| evaluate/pycocoevalcap/meteor                                                           |          1 |         58 |         11 |         14 |         83 |
+| evaluate/pycocoevalcap/rouge                                                            |          1 |         53 |         34 |         19 |        106 |
+| evaluate/pycocoevalcap/spice                                                            |          3 |        111 |         14 |         28 |        153 |
+| evaluate/pycocoevalcap/tokenizer                                                        |          1 |         34 |         25 |         11 |         70 |
+| models                                                                                  |          3 |        103 |         77 |         36 |        216 |
+| prepare                                                                                 |          5 |        148 |         35 |         28 |        211 |
+| static                                                                                  |         12 |     15,862 |      2,378 |      3,241 |     21,481 |
+| static/css                                                                              |          5 |      1,875 |         55 |        118 |      2,048 |
+| static/js                                                                               |          7 |     13,987 |      2,323 |      3,123 |     19,433 |
+| templates                                                                               |          6 |        570 |         46 |         84 |        700 |
+| test                                                                                    |          2 |        130 |         31 |         41 |        202 |
+| train                                                                                   |          3 |        302 |         90 |         84 |        476 |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/master_project_image_caption/Pipfile                                             | toml       |         20 |          0 |          4 |         24 |
+| /Users/master_project_image_caption/Pipfile.lock                                        | JSON       |        327 |          0 |          1 |        328 |
+| /Users/master_project_image_caption/evaluate/__init__.py                                | Python     |          0 |          0 |          1 |          1 |
+| /Users/master_project_image_caption/evaluate/evaluate.py                                | Python     |        131 |         48 |         35 |        214 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/README.md                    | Markdown   |         45 |          0 |         13 |         58 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/bleu/bleu.py                 | Python     |         22 |         14 |         12 |         48 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/bleu/bleu_scorer.py          | Python     |        180 |         22 |         63 |        265 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/cider/cider.py               | Python     |         22 |         21 |         12 |         55 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/cider/cider_scorer.py        | Python     |        128 |         43 |         22 |        193 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/eval.py                      | Python     |         57 |         10 |         10 |         77 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/meteor/meteor.py             | Python     |         58 |         11 |         14 |         83 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/rouge/rouge.py               | Python     |         53 |         34 |         19 |        106 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/setup.py                     | Python     |         10 |          1 |          3 |         14 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/spice/__init__.py            | Python     |          0 |          0 |          1 |          1 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/spice/get_stanford_models.py | Python     |         34 |          5 |         10 |         49 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/spice/spice.py               | Python     |         77 |          9 |         17 |        103 |
+| /Users/master_project_image_caption/evaluate/pycocoevalcap/tokenizer/ptbtokenizer.py    | Python     |         34 |         25 |         11 |         70 |
+| /Users/master_project_image_caption/main.py                                             | Python     |         34 |          2 |          6 |         42 |
+| /Users/master_project_image_caption/models/__init__.py                                  | Python     |          0 |          0 |          1 |          1 |
+| /Users/master_project_image_caption/models/decoder_Attention.py                         | Python     |         79 |         63 |         26 |        168 |
+| /Users/master_project_image_caption/models/encoder.py                                   | Python     |         24 |         14 |          9 |         47 |
+| /Users/master_project_image_caption/prepare/__init__.py                                 | Python     |          0 |          0 |          1 |          1 |
+| /Users/master_project_image_caption/prepare/data_download.py                            | Python     |         10 |         10 |          3 |         23 |
+| /Users/master_project_image_caption/prepare/data_preprocess.py                          | Python     |         69 |          8 |         13 |         90 |
+| /Users/master_project_image_caption/prepare/imgs2hdf5.py                                | Python     |         35 |         11 |          6 |         52 |
+| /Users/master_project_image_caption/prepare/word2vec.py                                 | Python     |         34 |          6 |          5 |         45 |
+| /Users/master_project_image_caption/run_app.py                                          | Python     |        118 |         21 |         17 |        156 |
+| /Users/master_project_image_caption/static/css/demo.css                                 | CSS        |         29 |          0 |          0 |         29 |
+| /Users/master_project_image_caption/static/css/index.css                                | CSS        |        505 |         25 |         53 |        583 |
+| /Users/master_project_image_caption/static/css/resource.css                             | CSS        |        666 |          5 |          0 |        671 |
+| /Users/master_project_image_caption/static/css/showresults.css                          | CSS        |         67 |          2 |         12 |         81 |
+| /Users/master_project_image_caption/static/css/upload.css                               | CSS        |        608 |         23 |         53 |        684 |
+| /Users/master_project_image_caption/static/js/demo.js                                   | JavaScript |         57 |          0 |          0 |         57 |
+| /Users/master_project_image_caption/static/js/index.js                                  | JavaScript |        296 |         44 |         34 |        374 |
+| /Users/master_project_image_caption/static/js/jquery-ui.js                              | JavaScript |     13,563 |      2,075 |      3,068 |     18,706 |
+| /Users/master_project_image_caption/static/js/nav.js                                    | JavaScript |          6 |          0 |          0 |          6 |
+| /Users/master_project_image_caption/static/js/resource.js                               | JavaScript |         40 |         15 |         10 |         65 |
+| /Users/master_project_image_caption/static/js/showresults.js                            | JavaScript |         15 |          9 |          9 |         33 |
+| /Users/master_project_image_caption/static/js/upload.js                                 | JavaScript |         10 |        180 |          2 |        192 |
+| /Users/master_project_image_caption/templates/button.html                               | HTML       |         20 |          2 |          9 |         31 |
+| /Users/master_project_image_caption/templates/demo.html                                 | HTML       |         82 |          6 |          8 |         96 |
+| /Users/master_project_image_caption/templates/index.html                                | HTML       |        146 |         17 |         43 |        206 |
+| /Users/master_project_image_caption/templates/resource.html                             | HTML       |        120 |         10 |          8 |        138 |
+| /Users/master_project_image_caption/templates/showresult.html                           | HTML       |         90 |          5 |          7 |        102 |
+| /Users/master_project_image_caption/templates/upload.html                               | HTML       |        112 |          6 |          9 |        127 |
+| /Users/master_project_image_caption/test/__init__.py                                    | Python     |          0 |          0 |          1 |          1 |
+| /Users/master_project_image_caption/test/discrible.py                                   | Python     |        130 |         31 |         40 |        201 |
+| /Users/master_project_image_caption/train/__init__.py                                   | Python     |          0 |          0 |          1 |          1 |
+| /Users/master_project_image_caption/train/dataset.py                                    | Python     |         32 |         15 |         14 |         61 |
+| /Users/master_project_image_caption/train/train.py                                      | Python     |        270 |         75 |         69 |        414 |
+| /Users/master_project_image_caption/utils.py                                            | Python     |        116 |         22 |         36 |        174 |
+| Total                                                                                   |            |     18,581 |      2,945 |      3,821 |     25,347 |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

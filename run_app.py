@@ -8,7 +8,6 @@ import matplotlib
 from flask import Flask
 from flask import render_template, request, jsonify, Response
 import json
-from flask_cors import CORS
 from utils import caption_image_beam_search, visualize_att
 from test.discrible import caption_img
 from werkzeug.utils import secure_filename
@@ -41,7 +40,6 @@ def models_init():
     return decoder,encoder,word_map,rev_word_map
 
 app = Flask(__name__)
-CORS(app)
 
 # # 设置静态文件缓存过期时间
 app.send_file_max_age_default = timedelta(seconds=1)
@@ -155,4 +153,4 @@ def downloadresources():
 
 if __name__ == '__main__':
     app.debug=True
-    app.run(host='0.0.0.0',port=8081,debug=True)
+    app.run(host='0.0.0.0',port=5000,debug=True)

@@ -345,7 +345,6 @@ def validate(val_loader, encoder, decoder, criterion):
                 imgs = encoder(imgs)
             scores, caps_sorted, decode_lengths, alphas, sort_ind = decoder(imgs, caps, caplens)
 
-            # Since we decoded starting with <start>, the targets are all words after <start>, up to <end>
             targets = caps_sorted[:, 1:]
 
             # Remove timesteps that we didn't decode at, or are pads
