@@ -60,22 +60,25 @@
   </nav>
   <div class="container" id="imageWgt">
     <div>
-      <p id ='message' align="center" style="color:aliceblue" ;>Select images, upload images, then get the test result.
+      <p id ='message' align="center" style="color:aliceblue" ;>Select images, upload images, then get the test result
       </p>
-      <h5 id ='message' align="center" style="color:crimson" ;>Only support .jpg and .png format image.
+      <h5 id ='message' align="center" style="color:crimson" ;>Only support .jpg and .png format image, others will fail
       </h5>
+      <h6 id ='message' align="center" style="color:crimson" ;>Since model is trained on the COCO dataset, it is recommended that you choose the test images from COCO.
+      </h6>
+      <h6 id ='message' align="center" style="color:crimson";> I random selected 100 images form COCO, you can dowload from <a href="https://livemanchesterac-my.sharepoint.com/:f:/g/personal/yan_liu-25_student_manchester_ac_uk/EubzSD50eN9JnlhAIbOhZXgB0XNcJ89ufKLrKID7M1ZYOA?e=zkFhB5">here</a> to test it !</h6>
     </div>
     <div class="row image-row">
       <div class="col-8">
         <div class="image-upload">
           <span class="image-icon">
           </span>
-          <span class="image-instr">Click here to select file(s)</span>
+          <span class="image-instr">Click here to select Image(s)</span>
         </div>
       </div>
       <div class="col-4">
         <ul class="list-group  image-status">
-          <li style="background-color: #ccc" ; class="list-group-item"># of file(s) <span
+          <li style="background-color: #ccc" ; class="list-group-item"># of image(s) <span
               class="badge badge-info image-count">0</span></li>
           <li style="background-color: #ccc" ; class="list-group-item">Total Size <span
               class="badge badge-info image-tot-size">0 Mb</span>
