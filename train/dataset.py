@@ -9,12 +9,6 @@ from torch.utils.data import Dataset
 class MyDataset(Dataset):
 
     def __init__(self, data_folder, split, transform=None):
-        """
-        :param data_folder: saved_data/
-        :param data_name:
-        :param split: split, one of 'TRAIN', 'VAL', or 'TEST'
-        :param transform: image transform pipeline
-        """
         self.split = split
         assert self.split in {'train', 'val', 'test'}
 

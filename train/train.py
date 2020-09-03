@@ -16,8 +16,9 @@ from nltk.translate.bleu_score import corpus_bleu
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu") # whether using gpu
 
 data_folder = '/saved_data' 
-data_name = 'trained_models'
+data_name = 'my_model' # your model's name
 
+# save the results during training: loss accuracy, bleu score
 training_loss=[]
 training_time=[]
 training_acc=[]
@@ -50,7 +51,8 @@ alpha_c = 1.  # regularization parameter for 'doubly stochastic attention'
 best_bleu4 = 0.  # BLEU-4 score
 print_freq = 100  # print (ouput) training/validation stats every __ batches
 fine_tune_encoder = False  # whether fine-tune the encoder
-checkpoint = 'saved_data/trained_models/checkpoint_trained_models.pth.tar'  # path to checkpoint: None means the first training. otherwise continue previous traning
+# the path of model
+checkpoint = None # path to model checkpoint: None means the first training. otherwise give your trained models' path to continue previous traning
 
 def clip_gradient(optimizer, grad_clip):
     """
@@ -218,6 +220,7 @@ def main_train():
         save_checkpoint(data_name, epoch, epochs_since_improvement, encoder, decoder, encoder_optimizer,
                         decoder_optimizer, recent_bleu4, is_best)
         print ('The bleu4 score of epoch {} is {}\n'.format(epoch,best_bleu4))
+    
     with open('saved_data/evaluation/training_time.json','w') as f1:
         json.dump(training_time, f1)
     with open('saved_data/evaluation/training_loss.json','w') as f2:
@@ -244,8 +247,6 @@ def train(train_loader, encoder, decoder, criterion, encoder_optimizer, decoder_
     decoder.train()  # dropout and batchnorm is used in decoder
     encoder.train() # image feature extraction
 
-    #batch_time = AverageMeter()  # forward prop. + back prop. time
-    #data_time = AverageMeter()  # data loading time
     losses = AverageMeter()  # loss (per word decoded)
     top5accs = AverageMeter()  # top5 accuracy
 
@@ -254,9 +255,6 @@ def train(train_loader, encoder, decoder, criterion, encoder_optimizer, decoder_
     # Batches
     print('Begin training')
     for i, (imgs, caps, caplens) in enumerate(train_loader):
-        #data_time.update(time.time() - start)
-
-        # Move to GPU, if available
         imgs = imgs.to(device)
         caps = caps.to(device)
         caplens = caplens.to(device)
@@ -372,11 +370,6 @@ def validate(val_loader, encoder, decoder, criterion):
                       'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                       'Top-5 Accuracy {top5.val:.3f} ({top5.avg:.3f})\t'.format(i, len(val_loader),
                                                                                 loss=losses, top5=top5accs))
-
-            # Store references (true captions), and hypothesis (prediction) for each image
-            # If for n images, we have n hypotheses, and references a, b, c... for each image, we need -
-            # references = [[ref1a, ref1b, ref1c], [ref2a, ref2b], ...], hypotheses = [hyp1, hyp2, ...]
-
             # References
             allcaps = allcaps[sort_ind]  # because images were sorted in the decoder
             for j in range(allcaps.shape[0]):

@@ -1,5 +1,4 @@
 import argparse
-from prepare.data_download import download
 from prepare.data_preprocess import split_dataset, build_vocabulary_word2idx, save_word2idx
 from prepare.imgs2hdf5 import images_save_in_hdf5
 from prepare.word2vec import save_cap_vec
@@ -18,8 +17,6 @@ if __name__ == '__main__':
     parser.add_argument('--evaluate', '-e', help='evaluate the test dataset')
 
     args = parser.parse_args()
-    if args.control == 'download':
-        download()
     if args.control == 'data_prepare':
         split_dataset('coco_dataset/caption_datasets/dataset_coco.json', 50)
         build_vocabulary_word2idx(5)

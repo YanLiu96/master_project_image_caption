@@ -1,6 +1,8 @@
 # Yan Liu's Master Project - Interactive image description generation system
 
-This repository is created for my master project in the university of manchester. It contains the source code and some important experimental data that shown in my dissertation
+This repository is created for my master project in the university of manchester. It contains the source code and some important experimental data that shown in my dissertation.
+
+If you have any question, please email me: [YanLiu](mailto:yan.liu-25@student.manchester.ac.uk")
 
 The demo website for my project is: http://78.141.226.122:5000/.
 
@@ -32,6 +34,7 @@ The demo website for my project is: http://78.141.226.122:5000/.
 │   ├── word2index              // folder to save vocabulary
 │   ├── cap2vec                 // folder to save annotations' vectors format
 │   ├── evaluation              // save prediction results and true labels for test set
+│   ├── hdf5_images             // images hdf5 format:test_images.hdf5, train_images.hdf5, val_images.hdf5
 ├── static
 │   ├── css                     // css file for web page
 │   ├── js                      // javascript file for web page
@@ -83,7 +86,7 @@ So far, you have prepared the data, then you nedd to install necessary enviromen
 |matplotlib|3.2.2|
 |etc.|install in python3.7|
 
-Ok, now, If you can run below comand step by step to train the model ! Also, you can open the train.py file and adjust some parameters or setting to train. It took more than an hour to train an epoch on an RTX 2080Ti GPU.
+Ok, now, you can run below comand step by step to train the model ! Also, you can open the train.py file and adjust some parameters or setting to train. It took more than an hour to train an epoch on an RTX 2080Ti GPU.
 
 ```txt
 python3 main.py -c data_prepare
@@ -155,4 +158,4 @@ Python3 run_app.py
 ## 5. Acknowledgement
 
 I would like to acknowledge my supervisor Dr. Aphrodite Galata for providing guidance, moral support, and feedback throughout this project. She made very meaningful suggestions for my project and guided me on how to write this dissertation.
-I would aslo like to thank [Kelvin Xu](https://arxiv.org/abs/1502.03044) for his paper and Sagar for the Pytorch Tutorial.
+I would aslo like to thank [Kelvin Xu](https://arxiv.org/abs/1502.03044) for his paper, Sagar for the Pytorch Tutorial and Codepen io for its html and css font.

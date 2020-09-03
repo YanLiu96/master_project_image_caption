@@ -1,7 +1,10 @@
 coco_dataset/caption_datasets
 coco_dataset/train2014
 coco_dataset/val2014
-saved_data/
+
+Pipfile
+Pipfile.lock
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
