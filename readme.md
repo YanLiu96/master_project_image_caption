@@ -108,6 +108,8 @@ python3 main.py -c train
 
 **Make sure you have run command above( `python3 main.py -c data_prepare`) to process data, otherwise you may lack necessary file**
 
+There are two ways to get the evaluation reuslts (score of bleu, spice, metor. cider, etc.)
+
 ### 3.1 use the model trained by yourself or provided by me
 
 If you dont like to train a new model and still want to do the this work, you can download pre-trained models below provided by me (but make sure the `checkpoint` path in `train.py` be right) and pick one to do the next job. Besides, you also need to download the vocabulary.The optimal_model is recommended.
@@ -130,7 +132,7 @@ python3 main.py --evaluate 3   # 3 means  beam search size is 3
 
 This also taks a lot of time (almost 30 minutes)
 
-### 3.1 use generated results instead of the model
+### 3.2 use generated results instead of the model
 
 Of course you can download the pre-saved prediction results and ture labels to save a lot of time !
 For example, we donwload the results (from below link) for the model with resnet152 as encoder without finetuning and beam search size is 3. (make sure you have vocabulary)
