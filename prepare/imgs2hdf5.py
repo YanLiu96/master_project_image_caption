@@ -1,6 +1,3 @@
-# Step3: data_preprocess.py created in 2020.6.17 13:19
-# This file resize the images and store them in hdf5 file.
-
 import os
 import time
 import h5py
@@ -10,22 +7,17 @@ import imageio
 
 from PIL import Image
 from progress.bar import ChargingBar
-# from scipy.misc import imread, imresize
 
 from prepare.data_preprocess import train_images_names, train_images_captions
 from prepare.data_preprocess import val_images_names, val_images_captions
 from prepare.data_preprocess import test_images_names, test_images_captions
 
-#from data_preprocess import test_images_captions
 def images_save_in_hdf5():
     # for train subset
-    #for imgae_name, image_captions in zip(train_images_names, train_images_captions):
     create_hdf5_file('train', train_images_names, train_images_captions,)
     # for val subset
-    #for imgae_name, image_captions in zip(val_images_names, val_images_captions):
     create_hdf5_file('val', val_images_names, val_images_captions)
     # for test subset
-    #for imgae_name, image_captions in zip(test_images_names, test_images_captions):
     create_hdf5_file('test', test_images_names, test_images_captions)
 
 def create_hdf5_file(type, imgaes_names, image_captions):

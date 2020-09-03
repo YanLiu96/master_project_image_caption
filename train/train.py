@@ -38,7 +38,7 @@ cudnn.benchmark = True
 
 # Training parameters
 start_epoch = 0 
-epochs = 30  # epochs number
+epochs = 20  # epochs number
 epochs_since_improvement = 0  # number of epochs that no improvement in validation BLEU
 batch_size = 32 # batch size
 workers = 1 
@@ -119,11 +119,11 @@ def save_checkpoint(data_name, epoch, epochs_since_improvement, encoder, decoder
              'decoder': decoder,
              'encoder_optimizer': encoder_optimizer,
              'decoder_optimizer': decoder_optimizer}
-    filename = 'saved_data/trained_models/checkpoint_' + data_name + '.pth.tar'
+    filename = 'saved_data/trained_models/' + data_name + '.pth.tar'
     torch.save(state, filename)
     # If this checkpoint is the best so far, store this best model
     if is_best:
-        filepath='saved_data/trained_models/best_checkpoint_' + data_name + '.pth.tar'
+        filepath='saved_data/trained_models/optimal_model.pth.tar'
         torch.save(state, filepath)
 
 def main_train():

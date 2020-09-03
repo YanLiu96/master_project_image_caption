@@ -34,7 +34,7 @@ The demo website for my project is: http://78.141.226.122:5000/.
 │   ├── word2index              // folder to save vocabulary
 │   ├── cap2vec                 // folder to save annotations' vectors format
 │   ├── evaluation              // save prediction results and true labels for test set
-│   ├── hdf5_images             // images hdf5 format:test_images.hdf5, train_images.hdf5, val_images.hdf5
+│   ├── hdf5_images             // contains: test_images.hdf5, train_images.hdf5, val_images.hdf5
 ├── static
 │   ├── css                     // css file for web page
 │   ├── js                      // javascript file for web page
@@ -49,6 +49,8 @@ The demo website for my project is: http://78.141.226.122:5000/.
 ```
 
 ## 2. Train the model
+
+**Noting!! Whatever step you take, make sure that the path to the model is correct, which will need to be modified in the code.**
 
 ### 2.1 Download data
 
@@ -86,19 +88,29 @@ So far, you have prepared the data, then you nedd to install necessary enviromen
 |matplotlib|3.2.2|
 |etc.|install in python3.7|
 
-Ok, now, you can run below comand step by step to train the model ! Also, you can open the train.py file and adjust some parameters or setting to train. It took more than an hour to train an epoch on an RTX 2080Ti GPU.
+### 2.3 Preprocess data
+
+run the following command to preprocess images data and their annotations
 
 ```txt
 python3 main.py -c data_prepare
+```
 
+### 2.4 train your model
+
+Finally, you can run below comand step by step to train the model ! Also, you can open the train.py file and adjust some parameters or setting to train. It took more than an hour to train an epoch on an RTX 2080Ti GPU.
+
+```txt
 python3 main.py -c train
 ```
 
 ## 3. Evaluate the trained model
 
+**Make sure you have run command above( `python3 main.py -c data_prepare`) to process data, otherwise you may lack necessary file**
+
 ### 3.1 use the model trained by yourself or provided by me
 
-If you dont like to train a new model and still want to do the this work, you can download pre-trained models below provided by me and pick one to do the next job. Besides, you also need to download the vocabulary.The optimal_model is recommended.
+If you dont like to train a new model and still want to do the this work, you can download pre-trained models below provided by me (but make sure the `checkpoint` path in `train.py` be right) and pick one to do the next job. Besides, you also need to download the vocabulary.The optimal_model is recommended.
 
 | Model | Downlaod Link |
 | ------------ | ------------- |
@@ -127,7 +139,7 @@ For example, we donwload the results (from below link) for the model with resnet
 | ------------ | ------------- |
 | evaluation result | [Dowload](https://livemanchesterac-my.sharepoint.com/:f:/g/personal/yan_liu-25_student_manchester_ac_uk/EtR4UNjEI-NAvU-DMfkk9YcBJb0CffkQuLvs5FBlOh8a1g?e=6udXhL)|
 
-Download the `resnet_152_bs3_test_hyp.json` and `resnet_152_bs3_test_ref.json`. Put them in the saved_data/evaluation/ foloder. Run the command below.
+Download the `resnet_152_bs3_test_hyp.json` and `resnet_152_bs3_test_ref.json`. Put them in the saved_data/evaluation/ foloder. Change their file path in save_data/evaluation/evaluate.py. Run the command below:
 
 ```txt
 python3 main.py --evaluate pre_save

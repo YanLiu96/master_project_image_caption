@@ -8,7 +8,7 @@ import matplotlib
 from flask import Flask
 from flask import render_template, request, jsonify, Response
 import json
-from utils import caption_image_beam_search, visualize_att
+from toolforweb import caption_image_beam_search, visualize_att
 from test.discrible import caption_img
 from werkzeug.utils import secure_filename
 from datetime import timedelta
@@ -41,7 +41,6 @@ def models_init():
 
 app = Flask(__name__)
 
-# # 设置静态文件缓存过期时间
 app.send_file_max_age_default = timedelta(seconds=1)
 decoder,encoder, word_map, rev_word_map = models_init()
 caption_result=[]
@@ -113,7 +112,6 @@ def upload():
         else:
             return render_template('upload.html')
     except:
-        #上传的文件是其他文件改成jpg格式会报错
         message = 'something error,please make sure the uploaded file is in JPG format!'
         return render_template('upload.html', message=message)
 
@@ -135,17 +133,6 @@ def showresult():
     print(img_src,sentence_list)
 
     return render_template('showresult.html',results=zip(img_src, sentence_list))
-
-    # def begin():
-    #     proc = subprocess.Popen(
-    #         ['python main.py --control \'train\''],             #call something with a lot of output so we can see it
-    #         shell=True,
-    #         stdout=subprocess.PIPE,
-    #         universal_newlines=True
-    #     )
-    #     for line in iter(proc.stdout.readline,''):
-    #         yield line.rstrip() + '<br/>\n'
-    # return Response(begin(), mimetype='text/html')  # text/html is required for most browsers to show th$
 
 @app.route('/resources', methods=['GET'])
 def downloadresources():

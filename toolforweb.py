@@ -45,22 +45,14 @@ def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=
     encoder_out = encoder_out.view(1, -1, encoder_dim)  # (1, num_pixels, encoder_dim)
     num_pixels = encoder_out.size(1)
 
-    # We'll treat the problem as having a batch size of k
-    encoder_out = encoder_out.expand(k, num_pixels, encoder_dim)  # (k, num_pixels, encoder_dim)
-
-    # Tensor to store top k previous words at each step; now they're just <start>
+    encoder_out = encoder_out.expand(k, num_pixels, encoder_dim)
     k_prev_words = torch.LongTensor([[word_map['<start>']]] * k).to(device)  # (k, 1)
 
-    # Tensor to store top k sequences; now they're just <start>
     seqs = k_prev_words  # (k, 1)
-
-    # Tensor to store top k sequences' scores; now they're just 0
     top_k_scores = torch.zeros(k, 1).to(device)  # (k, 1)
 
-    # Tensor to store top k sequences' alphas; now they're just 1s
-    seqs_alpha = torch.ones(k, 1, enc_image_size, enc_image_size).to(device)  # (k, 1, enc_image_size, enc_image_size)
+    seqs_alpha = torch.ones(k, 1, enc_image_size, enc_image_size).to(device)
 
-    # Lists to store completed sequences, their alphas and scores
     complete_seqs = list()
     complete_seqs_alpha = list()
     complete_seqs_scores = list()

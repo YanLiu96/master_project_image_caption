@@ -22,7 +22,6 @@ from tqdm import tqdm
 hyp={}
 ref={}
 data_folder = '/saved_data'
-data_name = 'trained_models'
 
 # Load word map (word2ix)
 with open('saved_data/word2index/word2idx.json', 'r') as j:
@@ -58,17 +57,18 @@ def calc_scores(ref, hypo):
     return final_scores
 
 def evaluate(pre_save, beam_size):
-    if pre_save=='pre_save':
-        with open('saved_data/ft_152/ft_resnet152_bs1_test_hyp.json', 'r') as j:
+    if pre_save=='pre_save': # if you dont want to waste time make sure you donwload below file
+        with open('saved_data/evaluation/resnet_152_bs3_test_hyp.json', 'r') as j:
             hyp = json.load(j)
-        with open('saved_data/ft_152/ft_resnet152_bs1_test_ref.json', 'r') as j:
+        with open('saved_data/evaluation/resnet_152_bs3_test_ref.json', 'r') as j:
             ref = json.load(j)
         print('Begin evaluation:')
         print(calc_scores(ref,hyp))
     else:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         cudnn.benchmark = True
-        checkpoint = 'saved_data/trained_models/resnet152_best_checkpoint_trained_models.pth.tar'
+        # make sure the path to your model is right!!
+        checkpoint = 'saved_data/trained_models/optimal_model.pth.tar'
         # Load model
         checkpoint = torch.load(checkpoint,map_location=str(device))
         decoder = checkpoint['decoder']
@@ -182,6 +182,8 @@ def evaluate(pre_save, beam_size):
         # Lists to store references (true captions), and hypothesis (prediction) for each image
         # If for n images, we have n hypotheses, and references a, b, c... for each image, we need -
         # references = [[ref1a, ref1b, ref1c], [ref2a, ref2b], ...], hypotheses = [hyp1, hyp2, ...]
+        
+        # save the references and hypotheses. Them can be used to caculate scores
         with open(os.path.join('saved_data/evaluation','test_ref.json'),'w') as f1:
             json.dump(ref, f1)
         with open(os.path.join('saved_data/evaluation','test_hyp.json'),'w') as f1:
