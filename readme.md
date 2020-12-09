@@ -9,22 +9,28 @@ The demo website for my project is: http://78.141.226.122:5000/.
 
 Below are a demo screenshots of the project.
 
-Home page
+<p align="center"> Home page </p>
+
 ![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/home.png)
 
-About page
+<p align="center"> About page </p>
+
 ![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/about.png)
 
-Resources page
+<p align="center"> Resources page </p>
+
 ![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/resources.png)
 
-test model page
+<p align="center"> test model page </p>
+
 ![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/test_model.png)
 
-result page
+<p align="center"> result page </p>
+
 ![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/test_results.png)
 
-Some more demos:
+<p align="center"> Some more demos: </p>
+
 ![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/demo.png)
 
 ## 1. Project Structure
