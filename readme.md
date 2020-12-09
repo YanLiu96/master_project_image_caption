@@ -4,9 +4,28 @@ This repository is created for my master project in the university of manchester
 
 If you have any question, please email me: [YanLiu](mailto:yan.liu-25@student.manchester.ac.uk")
 
-The demo website for my project is: http://78.141.226.122:5000/.(The website will be closed after November)
+The demo website for my project is: http://78.141.226.122:5000/.
+(The website will be closed after November)
 
 Below are a demo screenshots of the project.
+
+Home page
+![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/home.png)
+
+About page
+![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/about.png)
+
+Resources page
+![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/resources.png)
+
+test model page
+![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/test_model.png)
+
+result page
+![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/test_results.png)
+
+Some more demos:
+![image text](https://github.com/YanLiu96/master_project_image_caption/blob/master/readmeimg/demo.png)
 
 ## 1. Project Structure
 
