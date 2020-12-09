@@ -4,7 +4,9 @@ This repository is created for my master project in the university of manchester
 
 If you have any question, please email me: [YanLiu](mailto:yan.liu-25@student.manchester.ac.uk")
 
-The demo website for my project is: http://78.141.226.122:5000/.
+The demo website for my project is: http://78.141.226.122:5000/.(The website will be closed after November)
+
+Below are a demo screenshots of the project.
 
 ## 1. Project Structure
 
